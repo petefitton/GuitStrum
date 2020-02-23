@@ -44,6 +44,8 @@ module.exports = (sequelize, DataTypes) => {
   });
   user.associate = function(models) {
     // associations can be defined here
+    models.user.belongsToMany(models.chord, { through: "chordsUsers" });
+    models.user.hasMany(models.song);
   };
 
   // Compares entered password to hashed password

@@ -49,14 +49,17 @@ app.get('/', function(req, res) {
   res.render('index');
 });
 
-app.get('/profile', isLoggedIn, function(req, res) {
-  res.render('profile');
-});
+// Do not want to have a profile proper
+// app.get('/profile', isLoggedIn, function(req, res) {
+//   res.render('profile');
+// });
 
 app.use('/auth', require('./controllers/auth'));
+app.use('/chords', require('./controllers/chords'));
+app.use('/songs', require('./controllers/songs'));
 // below is for running the test file in the controllers folder
   // we used it to test the isLoggedIn middleware without having to add the isLoggedIn middleware all throughout
-app.use('/', isLoggedIn, require('./controllers/test'));
+// app.use('/', isLoggedIn, require('./controllers/test'));
 
 var server = app.listen(process.env.PORT || 3000);
 
