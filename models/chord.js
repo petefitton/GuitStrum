@@ -1,9 +1,24 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
   const chord = sequelize.define('chord', {
-    strings: DataTypes.STRING,
-    fingering: DataTypes.STRING,
-    chordName: DataTypes.STRING,
+    strings: {
+      type: DataTypes.STRING,
+      validate: {
+        notEmpty: true
+      }
+    },
+    fingering: {
+      type: DataTypes.STRING,
+      validate: {
+        notEmpty: true
+      }
+    },
+    chordName: {
+      type: DataTypes.STRING,
+      validate: {
+        notEmpty: true
+      }
+    },
     displayName: DataTypes.STRING,
     searchName: DataTypes.STRING
   }, {});

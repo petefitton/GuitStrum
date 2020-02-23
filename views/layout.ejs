@@ -12,6 +12,9 @@
   <body>
     <header class="container">
       <nav>
+        <a href="/">GuitStrum</a>
+        <a href="/chords/index">Chords</a>
+        <a href="/songs/index">Songs</a>
         <% if (currentUser) { %>
           <a href="/auth/logout">Logout</a>
           <!-- <a href="/profile">Profile</a> -->
@@ -22,7 +25,6 @@
       </nav>
     </header>
     <div class="container">
-      <h1>GuitStrum</h1>
       <% include partials/alerts %>
 
       <%- body %>

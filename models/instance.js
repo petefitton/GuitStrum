@@ -3,7 +3,12 @@ module.exports = (sequelize, DataTypes) => {
   const instance = sequelize.define('instance', {
     chordId: DataTypes.INTEGER,
     songId: DataTypes.INTEGER,
-    location: DataTypes.NUMERIC
+    location: {
+      type: DataTypes.NUMERIC
+      // validate: {
+      //   notNull: true
+      // }
+    }
   }, {});
   instance.associate = function(models) {
     // associations can be defined here

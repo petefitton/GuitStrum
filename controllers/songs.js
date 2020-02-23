@@ -39,7 +39,7 @@ router.put('/:id', (req, res) => {
 });
 
 // deletes a song from the DB (both from song and instance tables)
-router.get('/', (req, res) => {
+router.delete('/', (req, res) => {
   res.render('songs/');
 });
 

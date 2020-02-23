@@ -9,18 +9,23 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       userId: {
+        allowNull: false,
         type: Sequelize.INTEGER
       },
       timeSig: {
+        allowNull: false,
         type: Sequelize.STRING
       },
       chordCadence: {
+        allowNull: false,
         type: Sequelize.STRING
       },
       instanceCount: {
+        allowNull: false,
         type: Sequelize.NUMERIC
       },
       public: {
+        allowNull: false,
         type: Sequelize.BOOLEAN
       },
       createdAt: {

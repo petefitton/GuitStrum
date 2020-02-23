@@ -2,10 +2,30 @@
 module.exports = (sequelize, DataTypes) => {
   const song = sequelize.define('song', {
     userId: DataTypes.INTEGER,
-    timeSig: DataTypes.STRING,
-    chordCadence: DataTypes.STRING,
-    instanceCount: DataTypes.NUMERIC,
-    public: DataTypes.BOOLEAN
+    timeSig: {
+      type: DataTypes.STRING,
+      validate: {
+        notEmpty: true
+      }
+    },
+    chordCadence: {
+      type: DataTypes.STRING,
+      validate: {
+        notEmpty: true
+      }
+    },
+    instanceCount: {
+      type: DataTypes.NUMERIC
+      // validate: {
+      //   notNull: true
+      // }
+    },
+    public: {
+      type: DataTypes.BOOLEAN
+      // validate: {
+      //   notNull: true
+      // }
+    }
   }, {});
   song.associate = function(models) {
     // associations can be defined here

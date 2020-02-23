@@ -9,12 +9,15 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       songId: {
+        allowNull: false,
         type: Sequelize.INTEGER
       },
       chordId: {
+        allowNull: false,
         type: Sequelize.INTEGER
       },
       location: {
+        allowNull: false,
         type: Sequelize.NUMERIC
       },
       createdAt: {

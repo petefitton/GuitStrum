@@ -9,12 +9,15 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       strings: {
+        allowNull: false,
         type: Sequelize.STRING
       },
       fingering: {
+        allowNull: false,
         type: Sequelize.STRING
       },
       chordName: {
+        allowNull: false,
         type: Sequelize.STRING
       },
       displayName: {
