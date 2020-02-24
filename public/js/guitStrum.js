@@ -1,0 +1,1 @@
+document.querySelector('#practice-bar').style.display = "hidden";
