@@ -2,10 +2,9 @@
 
 
 
+## Wireframes, Routes, and Database Planning:
 
-Wireframes:
-
-![Wireframes](planningScans)
+![PlanningScans](/img/planningScans.pdf)
 
 
 
