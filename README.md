@@ -5,7 +5,7 @@
 
 Wireframes:
 
-![Wireframes](/planningScans)
+![Wireframes](planningScans)
 
 
 
