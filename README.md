@@ -1,3 +1,5 @@
+Changing README to show that this branch of project is for testing alerts & login/logout/sign-up functionality (possible asynchronous issues).
+
 # Express Authentication
 
 Express authentication template using Passport + flash messages + custom middleware
