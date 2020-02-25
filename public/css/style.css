@@ -11,3 +11,11 @@
 .green {
     background-color: rgb(32, 167, 32);
 }
+
+.parallax-container {
+    height: 400px;
+}
+
+footer {
+    min-height: 200px;
+}

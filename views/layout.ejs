@@ -13,39 +13,50 @@
     <link rel="stylesheet" href="/css/style.css">
   </head>
   <body>
-    <header class="container">
-      <nav>
-        <a href="/">GuitStrum</a>
-        <a href="/chords/index">Chords</a>
-        <a href="/songs/index">Songs</a>
-        <% if (currentUser) { %>
-          <a href="/auth/logout">Logout</a>
-          <!-- <a href="/profile">Profile</a> -->
-        <% } else { %>
-        <a href="/auth/signup">Signup</a>
-        <a href="/auth/login">Login</a>
-        <% } %>
-      </nav>
-    </header>
+    <nav>
+      <div class="nav-wrapper light-blue darken-4">
+        <ul id="nav-mobile" class="left hide-on-med-and-down">
+          <!-- <a class="left" href="/">GuitStrum</a> -->
+          <a href="/" class="brand-logo center">GuitStrum</a>
+          <!-- <a href="/chords/">Chords</a> -->
+          <li><a href="/chords/">Chords</a></li>
+          <!-- <a href="/songs/">Songs</a> -->
+          <li><a href="/songs/">Songs</a></li>
+        </ul>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+          <% if (currentUser) { %>
+            <!-- <a class="right" href="/auth/logout">Logout</a> -->
+            <li><a href="/auth/logout">Logout</a></li>
+            <!-- <a href="/profile">Profile</a> -->
+          <% } else { %>
+          <!-- <a class="right" href="/auth/signup">Signup</a> -->
+          <li><a href="/auth/signup">Signup</a></li>
+          <!-- <a class="right" href="/auth/login">Login</a> -->
+          <li><a href="/auth/login">Login</a></li>
+          <% } %>
+        </ul>
+      </div>
+    </nav>
     <div class="container">
       <% include partials/alerts %>
 
       <%- body %>
     </div>
-    <footer>
+    <footer class="grey darken-3">
       <a href="/">Home</a>
       <!-- insert a small line here -->
       <a href="/chords/">Chords Home</a>
       <a href="/songs/">Songs Home</a>
       <a href="/songs/new">Create New Song</a>
-      <p>Made by</p>
-      <p>Pete Fitton</p>
-      <p>Copyright 2020</p>
+      <p class="white-text">Made by</p>
+      <p class="white-text">Pete Fitton</p>
+      <p class="white-text">Copyright 2020</p>
     </footer>
-    <!-- <script src="//code.jquery.com/jquery.js"></script> -->
+    <script src="//code.jquery.com/jquery.js"></script>
     <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script> -->
     <!--JavaScript at end of body for optimized loading-->
     <script type="text/javascript" src="/js/materialize.min.js"></script>
-    <script type="text/javascript" src="/js/guitStrum.js"></script>
+    <!-- <script type="text/javascript" src="/js/guitStrum.js"></script> -->
+    <script type="text/javascript" src="/js/parallax.js"></script>
   </body>
 </html>
