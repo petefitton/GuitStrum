@@ -1,1 +1,27 @@
-<h1>Home page for songs section of site. Has list of public songs and list of private songs plus a create a new song button.</h1>
+<!-- <h1>Home page for songs section of site. Has list of public songs and list of private songs plus a create a new song button.</h1> -->
+
+<h3>Public Songs:</h3>
+<ul>
+  <!-- iterate with for each in ejs to create an li tag with a href equal to the song's url location -->
+  <li><a href="">EJS to List title</a></li>
+  <!-- end iteration -->
+</ul>
+
+<h3>Private Songs:</h3>
+<ul>
+  <!-- iterate with for each in ejs to create an li tag with a href equal to the song's url location -->
+  <li><a href="">EJS to List title</a></li>
+  <!-- end iteration -->
+</ul>
+
+<!-- form for new song -->
+<form action="/songs/new" id="newSongForm">
+  <button type="submit" form="newSongForm">CREATE NEW SONG</button>
+</form>
+
+<!-- search for song -->
+<form action="/songs/result" method="get" id="searchForm">
+  <label for="songSearch">Search for Chord:</label>
+  <input type="search" name="songSearch" id="songSearch">
+  <button type="submit" form="searchForm">SEARCH</button>
+</form>

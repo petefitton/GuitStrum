@@ -1,1 +1,59 @@
-<h1>This is the page for editing a song.</h1>
+<h1 class="center-align">Song Title</h1>
+
+
+<form method="POST" action="/songs/new/test" id="newSongFormOne">
+  <div class="row">
+    <div class="input-field col s6">
+      <input type="search" name="songName" id="songName">
+      <label for="songName">Song Name</label>
+    </div>
+
+    <div class="input-field col s3">
+      <select name = "timeSig" id = "timeSig">
+        <option value = "4 4" selected>4/4</option>
+        <option value = "3 4">3/4</option>
+        <option value = "6 8">6/8</option>
+      </select>
+      <label for="timeSig">Time Signature</label>
+    </div>
+
+    <div class="input-field col s3">
+      <select name = "chordCad" id = "chordCad">
+        <option value = "1">Whole Notes</option>
+        <option value = "2">Half Notes</option>
+        <option value = "4" selected>Quarter Notes</option>
+        <option value = "8">Eighth Notes</option>
+      </select>
+      <label for="chordCad">Chord Cadence</label>
+    </div>
+  </div>
+  <div class="row">
+    <div class="input-field col s3">
+      <input type="number" name="measureNumber" id="measureNumber" value='32'>
+      <label for="measureNumber">Number of measures</label>
+    </div>
+    <div class="col s3">
+    </div>
+    <div class="input-field col s3">
+      <p>
+        <label>
+          <input name="pubPriv" type="radio" checked />
+          <span>Private</span>
+        </label>
+      </p>
+    </div>
+    <div class="input-field col s3">
+      <p>
+        <label>
+          <input name="pubPriv" type="radio" />
+          <span>Public</span>
+        </label>
+      </p>
+    </div>
+    <button class="btn waves-effect waves-light right" type="submit" form="newSongFormOne">SUBMIT
+      <i class="material-icons right">send</i>
+    </button>
+    </div>
+  </form>
+</div>
+

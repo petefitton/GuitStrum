@@ -15,6 +15,9 @@ router.get('/new', (req, res) => {
 
 // submits the first page of song creation
 router.post('/new/:id', (req, res) => {
+  // submit button from new.ejs file in songs view folder sends here
+  // should add info to DB
+  // will render songs/edit page with the DB info accessible
   res.render('songs/edit');
 });
 
