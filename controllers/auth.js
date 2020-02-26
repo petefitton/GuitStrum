@@ -22,7 +22,7 @@ router.post('/signup', (req, res) => {
       console.log(`User created`);
       // res.redirect('/');
       passport.authenticate('local', {
-        successRedirect: '/',
+        successRedirect: '/profile',
         successFlash: 'Thanks for signing up!'
       })(req, res);
     } else {
@@ -50,13 +50,13 @@ router.post('/login', passport.authenticate('local', {
 }), (req, res) => {
   req.flash('success', 'You successfully logged in');
   req.session.save(function() {
-    res.redirect('/');
+    res.redirect('/profile');
   })
 });
 
 router.get('/logout', (req, res) => {
   req.logout();
-  req.flash('success', 'Take care!');
+  req.flash('success', 'You have logged out successfully');
   res.redirect('/');
 });
 

@@ -1,15 +1,5 @@
-.alert {
-    border-radius: 10px;
-    box-shadow: .1em .1em rgb(0, 0, 0);
-    color: white;
-}
-
-.red {
-    background-color: rgb(177, 33, 33);
-}
-
-.green {
-    background-color: rgb(32, 167, 32);
+.alertText {
+    margin-left: 10px;
 }
 
 .parallax-container {
@@ -18,4 +8,20 @@
 
 footer {
     min-height: 200px;
+}
+
+.time44 {
+    max-height: 35px;
+    margin-top: 13px;
+}
+
+.barIcon {
+    font-size: 50px;
+    margin: 0;
+}
+
+.chordText {
+    font-size: 28px;
+    margin-bottom: 0;
+    margin-top: 20px;
 }

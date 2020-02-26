@@ -49,10 +49,9 @@ app.get('/', function(req, res) {
   res.render('index');
 });
 
-// Do not want to have a profile proper
-// app.get('/profile', isLoggedIn, function(req, res) {
-//   res.render('profile');
-// });
+app.get('/profile', isLoggedIn, function(req, res) {
+  res.render('profile');
+});
 
 app.use('/auth', require('./controllers/auth'));
 app.use('/chords', require('./controllers/chords'));

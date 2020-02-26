@@ -1,48 +1,19 @@
-<h1 class="center-align">Song Title</h1>
-
-
-<form method="POST" action="/songs/new/test" id="newSongFormOne">
+<!-- form action should add song id in place of word test below -->
+<form method="POST" action="/songs/test" id="songEditForm">
   <div class="row">
-    <div class="input-field col s6">
-      <input type="search" name="songName" id="songName">
-      <label for="songName">Song Name</label>
+    <div class="input-field col s8">
+      <input type="search" name="songName" id="songName" value="Song Title" class="center-align">
     </div>
-
-    <div class="input-field col s3">
-      <select name = "timeSig" id = "timeSig">
-        <option value = "4 4" selected>4/4</option>
-        <option value = "3 4">3/4</option>
-        <option value = "6 8">6/8</option>
-      </select>
-      <label for="timeSig">Time Signature</label>
-    </div>
-
-    <div class="input-field col s3">
-      <select name = "chordCad" id = "chordCad">
-        <option value = "1">Whole Notes</option>
-        <option value = "2">Half Notes</option>
-        <option value = "4" selected>Quarter Notes</option>
-        <option value = "8">Eighth Notes</option>
-      </select>
-      <label for="chordCad">Chord Cadence</label>
-    </div>
-  </div>
-  <div class="row">
-    <div class="input-field col s3">
-      <input type="number" name="measureNumber" id="measureNumber" value='32'>
-      <label for="measureNumber">Number of measures</label>
-    </div>
-    <div class="col s3">
-    </div>
-    <div class="input-field col s3">
+    <div class="input-field col s2">
       <p>
         <label>
           <input name="pubPriv" type="radio" checked />
+          <!-- Conditional render should determine which radio button is automatically checked -->
           <span>Private</span>
         </label>
       </p>
     </div>
-    <div class="input-field col s3">
+    <div class="input-field col s2">
       <p>
         <label>
           <input name="pubPriv" type="radio" />
@@ -50,10 +21,173 @@
         </label>
       </p>
     </div>
-    <button class="btn waves-effect waves-light right" type="submit" form="newSongFormOne">SUBMIT
-      <i class="material-icons right">send</i>
-    </button>
+  </div>
+
+
+
+  <div class="row">
+    <div class="input-field col s1">
+      <img class="time44" src="https://mymusiconline.co.uk/wp-content/uploads/graphics_png/time_sign_44.png" alt="">
     </div>
-  </form>
+    <div class="input-field col s1 barIcon">
+      |
+    </div>
+    <div class="input-field col s1">
+      <input type="text" name="chord1" id="chord1">
+    </div>
+    <div class="input-field col s1">
+      <input type="text" name="chord1" id="chord1">
+    </div>
+    <div class="input-field col s1">
+      <input type="text" name="chord1" id="chord1">
+    </div>
+    <div class="input-field col s1">
+      <input type="text" name="chord1" id="chord1">
+    </div>
+    <div class="input-field col s1 barIcon">
+      |
+    </div>
+    <div class="input-field col s1">
+      <input type="text" name="chord1" id="chord1">
+    </div>
+    <div class="input-field col s1">
+      <input type="text" name="chord1" id="chord1">
+    </div>
+    <div class="input-field col s1">
+      <input type="text" name="chord1" id="chord1">
+    </div>
+    <div class="input-field col s1">
+      <input type="text" name="chord1" id="chord1">
+    </div>
+    <div class="input-field col s1 barIcon">
+      |
+    </div>
+  </div>
+  <div class="row">
+    <div class="input-field col s1">
+    </div>
+    <div class="input-field col s1 barIcon">
+      |
+    </div>
+    <div class="input-field col s1">
+      <input type="text" name="chord1" id="chord1">
+    </div>
+    <div class="input-field col s1">
+      <input type="text" name="chord1" id="chord1">
+    </div>
+    <div class="input-field col s1">
+      <input type="text" name="chord1" id="chord1">
+    </div>
+    <div class="input-field col s1">
+      <input type="text" name="chord1" id="chord1">
+    </div>
+    <div class="input-field col s1 barIcon">
+      |
+    </div>
+    <div class="input-field col s1">
+      <input type="text" name="chord1" id="chord1">
+    </div>
+    <div class="input-field col s1">
+      <input type="text" name="chord1" id="chord1">
+    </div>
+    <div class="input-field col s1">
+      <input type="text" name="chord1" id="chord1">
+    </div>
+    <div class="input-field col s1">
+      <input type="text" name="chord1" id="chord1">
+    </div>
+    <div class="input-field col s1 barIcon">
+      |
+    </div>
+  </div>
+  <div class="row">
+    <div class="input-field col s1">
+    </div>
+    <div class="input-field col s1 barIcon">
+      |
+    </div>
+    <div class="input-field col s1">
+      <input type="text" name="chord1" id="chord1">
+    </div>
+    <div class="input-field col s1">
+      <input type="text" name="chord1" id="chord1">
+    </div>
+    <div class="input-field col s1">
+      <input type="text" name="chord1" id="chord1">
+    </div>
+    <div class="input-field col s1">
+      <input type="text" name="chord1" id="chord1">
+    </div>
+    <div class="input-field col s1 barIcon">
+      |
+    </div>
+    <div class="input-field col s1">
+      <input type="text" name="chord1" id="chord1">
+    </div>
+    <div class="input-field col s1">
+      <input type="text" name="chord1" id="chord1">
+    </div>
+    <div class="input-field col s1">
+      <input type="text" name="chord1" id="chord1">
+    </div>
+    <div class="input-field col s1">
+      <input type="text" name="chord1" id="chord1">
+    </div>
+    <div class="input-field col s1 barIcon">
+      |
+    </div>
+  </div>
+  <div class="row">
+    <div class="input-field col s1">
+    </div>
+    <div class="input-field col s1 barIcon">
+      |
+    </div>
+    <div class="input-field col s1">
+      <input type="text" name="chord1" id="chord1">
+    </div>
+    <div class="input-field col s1">
+      <input type="text" name="chord1" id="chord1">
+    </div>
+    <div class="input-field col s1">
+      <input type="text" name="chord1" id="chord1">
+    </div>
+    <div class="input-field col s1">
+      <input type="text" name="chord1" id="chord1">
+    </div>
+    <div class="input-field col s1 barIcon">
+      |
+    </div>
+    <div class="input-field col s1">
+      <input type="text" name="chord1" id="chord1">
+    </div>
+    <div class="input-field col s1">
+      <input type="text" name="chord1" id="chord1">
+    </div>
+    <div class="input-field col s1">
+      <input type="text" name="chord1" id="chord1">
+    </div>
+    <div class="input-field col s1">
+      <input type="text" name="chord1" id="chord1">
+    </div>
+    <div class="input-field col s1 barIcon">
+      |
+    </div>
+  </div>
+</form>
+
+<!-- form for deleting song -->
+<!-- <form action=""></form> -->
+
+<div class="row">
+  <!-- <div class="input-field col s2">
+  </div> -->
+  <button class="btn red darken-4 waves-effect waves-light left" type="submit" form="">DELETE
+  </button>
+  <!-- <div class="col s3">
+  </div> -->
+  <button class="btn waves-effect waves-light right" type="submit" form="songEditForm">Publish
+    <i class="material-icons right">send</i>
+  </button>
 </div>
 

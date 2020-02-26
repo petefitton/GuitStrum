@@ -1,4 +1,39 @@
 <!-- I do not plan on having a profile page -->
-<h2>Profile Page</h2>
+<div class="row">
+  <div class="col s4"></div>
+  <h2 class="center-align col s4">Profile Page</h2>
+  <div class="col s1"></div>
+  <div class="col s3">
+    <form action="/songs/new" method="get" id="newSong">
+      <button type="submit" form="newSong" class="orange white-text darken-4 waves-effect waves-light btn-large">Create New Song</button>
+    </form>
+  </div>
+</div>
 
-<a href="/">Home</a>
+<!-- <a href="/">Home</a> -->
+
+<div class="row">
+  <div class="col s4">
+    <h3>Public Songs:</h3>
+    <p>Example song</p>
+    <p>Example song</p>
+    <p>Example song</p>
+  </div>
+
+  <div class="col s4">
+    <h3>Private Songs:</h3>
+    <p>Example song</p>
+    <p>Example song</p>
+    <p>Example song</p>
+  </div>
+
+  <!-- This search functionality will only come into play if I have a search land page and can integrate a search -->
+  <!-- <div class="col s3">
+    <form action="/songs/result" method="get" id="searchForm">
+      <input type="search" name="songSearch" id="songSearch">
+      <button type="submit" form="searchForm" class="btn-flat">Search for Song</button>
+    </form>
+  </div>
+  <div class="col s1">
+  </div> -->
+</div>
