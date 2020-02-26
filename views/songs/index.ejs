@@ -1,27 +1,40 @@
 <!-- <h1>Home page for songs section of site. Has list of public songs and list of private songs plus a create a new song button.</h1> -->
 
-<h3>Public Songs:</h3>
-<ul>
-  <!-- iterate with for each in ejs to create an li tag with a href equal to the song's url location -->
-  <li><a href="">EJS to List title</a></li>
-  <!-- end iteration -->
-</ul>
+<div class="row">
+  <div class="col s4">
+    <h3>Public Songs:</h3>
+    <p>Example song</p>
+    <p>Example song</p>
+    <p>Example song</p>
+    <ul>
+      <!-- iterate with for each in ejs to create an li tag with a href equal to the song's url location -->
+      <li><a href="">EJS to List title</a></li>
+      <!-- end iteration -->
+    </ul>
+  </div>
 
-<h3>Private Songs:</h3>
-<ul>
-  <!-- iterate with for each in ejs to create an li tag with a href equal to the song's url location -->
-  <li><a href="">EJS to List title</a></li>
-  <!-- end iteration -->
-</ul>
+  <div class="col s4">
+    <h3>Private Songs:</h3>
+    <p>Example song</p>
+    <p>Example song</p>
+    <p>Example song</p>
+    <ul>
+      <!-- iterate with for each in ejs to create an li tag with a href equal to the song's url location -->
+      <li><a href="">EJS to List title</a></li>
+      <!-- end iteration -->
+    </ul>
+  </div>
 
-<!-- form for new song -->
-<form action="/songs/new" id="newSongForm">
-  <button type="submit" form="newSongForm">CREATE NEW SONG</button>
-</form>
-
-<!-- search for song -->
-<form action="/songs/result" method="get" id="searchForm">
-  <label for="songSearch">Search for Chord:</label>
-  <input type="search" name="songSearch" id="songSearch">
-  <button type="submit" form="searchForm">SEARCH</button>
-</form>
+  <div class="col s3">
+    <form action="/songs/new" method="get" id="newSongForm">
+      <button type="submit" form="newSongForm" class="orange white-text darken-4 waves-effect waves-light btn-large">Create New Song</button>
+    </form>
+  </div>
+  <!-- This search functionality will only come into play if I have a search land page and can integrate a search -->
+  <!-- <div class="col s3">
+    <form action="/songs/result" method="get" id="searchForm">
+      <input type="search" name="songSearch" id="songSearch">
+      <button type="submit" form="searchForm" class="btn-flat">Search for Song</button>
+    </form>
+  </div> -->
+</div>

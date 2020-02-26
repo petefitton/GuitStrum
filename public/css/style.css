@@ -1,3 +1,13 @@
+body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
+main {
+    flex: 1 0 auto;
+}
+
 .alertText {
     margin-left: 10px;
 }
@@ -11,7 +21,7 @@ footer {
 }
 
 .time44 {
-    max-height: 35px;
+    max-height: 56px;
     margin-top: 13px;
 }
 
@@ -24,4 +34,8 @@ footer {
     font-size: 28px;
     margin-bottom: 0;
     margin-top: 20px;
+}
+
+.h1MargTopLower {
+    margin-top: 27px;
 }

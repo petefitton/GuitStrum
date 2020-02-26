@@ -4,8 +4,6 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>GuitStrum</title>
-      <!-- Latest compiled and minified CSS & JS -->
-      <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous"> -->
     <!--Import Google Icon Font-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!--Import materialize.css-->
@@ -37,24 +35,41 @@
         </ul>
       </div>
     </nav>
-    <div>
+    <main>
       <% include partials/alerts %>
 
       <%- body %>
-    </div>
-    <footer class="grey darken-3">
-      <a href="/">Home</a>
-      <!-- insert a small line here -->
-      <a href="/chords/">Chords Home</a>
-      <a href="/songs/">Songs Home</a>
-      <a href="/songs/new">Create New Song</a>
-      <p class="white-text">Made by</p>
-      <p class="white-text">Pete Fitton</p>
-      <p class="white-text">Copyright 2020</p>
+    </main>
+    <footer class="page-footer grey darken-3">
+      <div class="container">
+        <div class="row">
+          <div class="col l2 s12">
+            <h5><a href="/" class="white-text">Home</a></h5>
+            <ul>
+              <li><a href="/profile/" class="grey-text text-lighten-2">My Profile</a></li>
+              <li><a class="grey-text text-lighten-2" href="/songs/">Songs Home</a></li>
+              <li><a class="grey-text text-lighten-2" href="/songs/new">Create New Song</a></li>
+              <li><a class="grey-text text-lighten-2" href="/chords/">Chords Home</a></li>
+            </ul>
+          </div>
+          <div class="col l4 offset-l1 s12">
+            <!-- <h5 class="white-text">Links</h5> -->
+            <!-- <ul> -->
+              <!-- <li><a class="grey-text text-lighten-2" href="/songs/">Songs Home</a></li> -->
+              <!-- <li><a class="grey-text text-lighten-2" href="/songs/new">Create New Song</a></li>
+              <li><a class="grey-text text-lighten-2" href="/chords/">Chords Home</a></li> -->
+            <!-- </ul> -->
+          </div>
+        </div>
+      </div>
+      <div class="footer-copyright">
+        <div class="container">
+        © 2020 Copyright
+        <a class="grey-text text-lighten-1 right" href="https://github.com/petefitton">Made by Pete Fitton</a>
+        </div>
+      </div>
     </footer>
     <script src="//code.jquery.com/jquery.js"></script>
-    <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script> -->
-    <!--JavaScript at end of body for optimized loading-->
     <script type="text/javascript" src="/js/materialize.min.js"></script>
     <script type="text/javascript" src="/js/jqueryInit.js"></script>
   </body>

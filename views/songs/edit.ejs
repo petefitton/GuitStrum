@@ -1,23 +1,25 @@
 <!-- form action should add song id in place of word test below -->
 <form method="POST" action="/songs/test" id="songEditForm">
   <div class="row">
-    <div class="input-field col s8">
+    <div class="col s3"></div>
+    <div class="input-field col s6">
       <input type="search" name="songName" id="songName" value="Song Title" class="center-align">
     </div>
-    <div class="input-field col s2">
-      <p>
-        <label>
-          <input name="pubPriv" type="radio" checked />
-          <!-- Conditional render should determine which radio button is automatically checked -->
-          <span>Private</span>
-        </label>
-      </p>
-    </div>
+    <div class="col s1"></div>
+    <!-- <div class="input-field col s2">
+    </div> -->
     <div class="input-field col s2">
       <p>
         <label>
           <input name="pubPriv" type="radio" />
           <span>Public</span>
+        </label>
+      </p>
+      <p>
+        <label>
+          <input name="pubPriv" type="radio" checked />
+          <!-- Conditional render should determine which radio button is automatically checked -->
+          <span>Private</span>
         </label>
       </p>
     </div>
