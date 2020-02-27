@@ -13,14 +13,14 @@ module.exports = (sequelize, DataTypes) => {
         notEmpty: true
       }
     },
-    chordName: {
+    colloqChordName: {
       type: DataTypes.STRING,
       validate: {
         notEmpty: true
       }
     },
-    displayName: DataTypes.STRING,
-    searchName: DataTypes.STRING
+    apiSearchChordName: DataTypes.STRING,
+    imageChordName: DataTypes.STRING
   }, {});
   chord.associate = function(models) {
     // associations can be defined here

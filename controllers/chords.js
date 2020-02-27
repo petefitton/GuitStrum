@@ -9,8 +9,9 @@ const isLoggedIn = require('../middleware/isLoggedIn');
 
 //Function declarations for use in multiple routes followed by routes below
 
-let chordNameUnderscore = function(req) {
-  let chordNameQuery = req.query.chordSearch;
+let chordNameUnderscore = function(param) {
+  // chordNameQuery is used within this function to convert from a colloqial chord name to the API search chord name
+  let chordNameQuery = param;
   // this code is for adding an underscore in order to search for the chord with the API call
     // if second character of string is a b or #, then add _ in between 2nd and 3rd char
     // else if there are at least two characters add _ after the first char
@@ -24,9 +25,19 @@ let chordNameUnderscore = function(req) {
     return chordNameQuery.join('');
 
   } else if (chordNameQuery[1] == ('#')) {
+    console.log('😌😗')
     chordNameQuery = chordNameQuery.split('');
-    chordNameQuery.splice(2, 0, '_');
+    if (chordNameQuery.length > 2) {
+      chordNameQuery.splice(2, 0, '_');
+    }
     chordNameQuery.splice(1, 1, '%23');
+    return chordNameQuery.join('');
+    
+  } else if (chordNameQuery[1] == ('%')) {
+    console.log('😊')
+    chordNameQuery = chordNameQuery.split('');
+    chordNameQuery.splice(4, 0, '_');
+    // chordNameQuery.splice(1, 1, '%23');
     return chordNameQuery.join('');
 
   } else if (chordNameQuery.length > 1) {
@@ -43,6 +54,16 @@ let chordNameUnderscore = function(req) {
   }
 }
 
+let addHash = function(chordName) {
+  if (chordName[1] == ('%')) {
+    chordName = chordName.split('');
+    chordName.splice(1, 3, '#');
+    return chordName.join('');
+  } else {
+    return chordName;
+  }
+}
+
 
 // Home page for chords - shows saved chords as well as has a search bar for finding chords - STRETCH GOAL: have a random chord button
 router.get('/', (req, res) => {
@@ -55,7 +76,7 @@ router.get('/', (req, res) => {
       }
     }).then((user) => {
       console.log('😇 This is the user object:');
-      console.log(user.chords[0].dataValues.chordName);
+      console.log(user.chords[0].chordName);
       res.render('chords/index', { user });
     })
   } else {
@@ -65,30 +86,41 @@ router.get('/', (req, res) => {
 
 // adds a chord to favorites
 router.post('/', isLoggedIn, (req, res) => {
+  let chordNameSearch = chordNameUnderscore(req.body.chordName);
+  axios.get(`https://api.uberchord.com/v1/chords/${chordNameSearch}`, {
+  }).then(function(apiResponse) {
+    console.log("API RESPONSE DATA: ");
+    console.log(apiResponse.data[0]);
+    // do an axios call for the info for the chord at req.body.chordName
+    // take that info and create a chord in the DB
+    // then redirect to the correct page
 
+    let newChordName = addHash(req.body.chordName);
 
-
-  // do an axios call for the info for the chord at req.body.chordName
-  // take that info and create a chord in the DB
-  // then redirect to the correct page
-
-
-  db.chord.create({
-    strings: strings,
-    fingering: fingering,
-    chordName: strings,
-    displayName: strings,
-    searchName: strings
-  }).then(() => {
-    res.redirect(`chords/result?chordSearch=${req.body.chordName}`);
-  }).catch(err => {console.log(err)});
+    db.chord.findOrCreate({
+      where: {
+        strings: apiResponse.data[0].strings,
+        fingering: apiResponse.data[0].fingering,
+        colloqChordName: newChordName,
+        apiSearchChordName: chordNameSearch,
+        imageChordName: req.body.chordName // should have %23 but no underscores
+      }
+    }).then(([chord, created]) => {
+      db.chordsUsers.create({
+        userId: req.user.id,
+        chordId: chord.id
+      }).then(() => {
+          res.redirect(`chords/result?chordSearch=${req.body.chordName}`);
+      }).catch(err => {console.log(err)});
+    });
+  });
 });
 
 // shows a specific chord - has search bar on this page
 router.get('/result', (req, res) => {
   console.log('test1')
   // if (req.query.chordSearch) {
-    let chordNameSearch = chordNameUnderscore(req);
+  let chordNameSearch = chordNameUnderscore(req.query.chordSearch);
   // } else {
   //   let chordNameSearch = 
   // }

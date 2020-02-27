@@ -16,14 +16,14 @@ module.exports = {
         allowNull: false,
         type: Sequelize.STRING
       },
-      chordName: {
+      colloqChordName: {
         allowNull: false,
         type: Sequelize.STRING
       },
-      displayName: {
+      apiSearchChordName: {
         type: Sequelize.STRING
       },
-      searchName: {
+      imageChordName: {
         type: Sequelize.STRING
       },
       createdAt: {
