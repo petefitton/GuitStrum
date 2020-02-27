@@ -7,15 +7,12 @@
     <h3>My Chords:</h3>
     <!-- for each chord that user has through ChordsUsers -->
     <% if (typeof user == 'object' && user) { %>
-      <% if (typeof user.chord == 'object' && user.chord) { %>
-        <% user.chord.forEach(function(chord) { %>
-          <p>Example song</p>
+      <% if (typeof user.chords == 'object' && user.chords) { %>
+        <% user.chords.forEach(function(chord) { %>
+          <p><a href="/chords/result?chordSearch=<%= chord.dataValues.chordName %>"><%= chord.dataValues.chordName %></a></p>
         <% }) %>
       <% } %>
     <% } %>
-    <p>Example song</p>
-    <p>Example song</p>
-    <p>Example song</p>
   </div>
   <div class="col s4 offset-s1">
     <form action="/chords/result" method="get">

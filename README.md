@@ -102,3 +102,8 @@ Sunday: Test/Bugs/Final Details
       * Sprint plan
       * How to use app
         * Functionality
+
+#### Sources of Information
+  * https://stackoverflow.com/questions/8217419/how-to-determine-if-javascript-array-contains-an-object-with-an-attribute-that-e
+    * How to iterate over an array to check to see if a condition is met or not
+      * Used for conditional rendering of Adding or Deleting a chord based off of if a user has added it to their favorite chords or not

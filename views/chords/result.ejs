@@ -13,6 +13,19 @@
     </form>
   </div>
 </div>
-<!-- need to write conditional render based off of if this chord is added to this user's DB as a favorite -->
-<button class="Btn Btn-Primary">Add to My Chords</button>
-<button class="Btn Btn-Primary">Delete from My Chords</button>
+
+<% if (typeof user == 'object' && user) { %>
+  <% if (typeof user.chords == 'object' && user.chords) { %>
+    <% if (user.chords.filter(chord => chord.chordName == chordName).length > 0) { %>
+      <!-- should use method override to delete -->
+      <form action="" method="post">
+        <button class="Btn Btn-Primary">Delete from My Chords</button>
+      </form>
+      <% } else { %>
+      <form action="/chords" method="post">
+        <input type="hidden" name="chordName" value="<%= chordName %>">
+        <button class="Btn Btn-Primary">Add to My Chords</button>
+      </form>
+    <% } %>
+  <% } %>
+<% } %>
