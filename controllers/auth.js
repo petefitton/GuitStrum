@@ -22,7 +22,7 @@ router.post('/signup', (req, res) => {
       console.log(`User created`);
       // res.redirect('/');
       passport.authenticate('local', {
-        successRedirect: '/profile',
+        successRedirect: `/profile/${user.id}`,
         successFlash: 'Thanks for signing up!'
       })(req, res);
     } else {
@@ -48,10 +48,20 @@ router.post('/login', passport.authenticate('local', {
   // successFlash: 'Welcome!',
   failureFlash: 'Invalid credentials'
 }), (req, res) => {
-  req.flash('success', 'You successfully logged in');
-  req.session.save(function() {
-    res.redirect('/profile');
-  })
+  db.user.findOne({
+    where:  {
+      email: req.body.email
+    }
+  }).then( user => {
+    // console.log(user.dataValues);
+    req.flash('success', 'You successfully logged in');
+    req.session.save(function() {
+      res.redirect(`/profile/${user.id}`);
+    })
+  }).catch(err => {
+    console.log(err);
+    res.send('Cannot find page');
+  });
 });
 
 router.get('/logout', (req, res) => {

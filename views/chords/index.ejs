@@ -1,8 +1,27 @@
-<h1>This page should have a list of saved chords on the left side of the page with a search bar on the right side plus a random chord button in the bottom right corner</h1>
+<!-- <h1>This page should have a list of saved chords on the left side of the page with a search bar on the right side plus a random chord button in the bottom right corner</h1> -->
+<!-- this is just a test directly below -->
 
 
-<form action="/chords/result" method="get">
-  <label for="chordSearch">Search for Chord:</label>
-  <input type="search" name="chordSearch" id="chordSearch">
-  <button type="submit">SEARCH</button>
-</form>
+<div class="row">
+  <div class="col s4 offset-s1">
+    <h3>My Chords:</h3>
+    <!-- for each chord that user has through ChordsUsers -->
+    <% if (typeof user == 'object' && user) { %>
+      <% if (typeof user.chord == 'object' && user.chord) { %>
+        <% user.chord.forEach(function(chord) { %>
+          <p>Example song</p>
+        <% }) %>
+      <% } %>
+    <% } %>
+    <p>Example song</p>
+    <p>Example song</p>
+    <p>Example song</p>
+  </div>
+  <div class="col s4 offset-s1">
+    <form action="/chords/result" method="get">
+      <!-- <label for="chordSearch">Search for Chord:</label> -->
+      <input type="search" name="chordSearch" id="chordSearch" placeholder="Search for Chord">
+      <button type="submit">SEARCH</button>
+    </form>
+  </div>
+</div>

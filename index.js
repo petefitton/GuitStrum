@@ -45,12 +45,19 @@ app.use(function(req, res, next) {
 });
 
 app.get('/', function(req, res) {
-  console.log(`User is ${ req.user ? req.user.name : 'not logged in'}`);
-  res.render('index');
+  // console.log(`User is ${ req.user ? req.user.name : 'not logged in'}`);
+  let userData;
+  if (req.user) {
+    userData = req.user.dataValues
+  } else {
+    userData = [];
+  }
+  res.render('index', { user: userData });
 });
 
-app.get('/profile', isLoggedIn, function(req, res) {
-  res.render('profile');
+app.get('/profile/:id', isLoggedIn, function(req, res) {
+  // console.log(req.user.dataValues);
+  res.render('profile', { user: req.user.dataValues });
 });
 
 app.use('/auth', require('./controllers/auth'));

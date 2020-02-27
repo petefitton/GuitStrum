@@ -1,14 +1,18 @@
 <!-- <h1>This page displays a specific chord and has a button to either add the chord to My Chords or to delete it from My Chords. Also has a search bar on the right side of page.</h1> -->
-
-<div class="chordImg">
-  <img class="chordImg" src="<%= source %>">
+<div class="row">
+  <div class="col s5 offset-s1">
+    <div class="chordImg">
+      <img class="chordImg" src="<%= source %>">
+    </div>
+  </div>
+  <div class="col s4">
+    <form action="/chords/result" method="get">
+      <label for="chordSearch">Search for Chord:</label>
+      <input type="search" name="chordSearch" id="chordSearch">
+      <button type="submit">SEARCH</button>
+    </form>
+  </div>
 </div>
-
-<form action="/chords/result" method="get">
-  <label for="chordSearch">Search for Chord:</label>
-  <input type="search" name="chordSearch" id="chordSearch">
-  <button type="submit">SEARCH</button>
-</form>
 <!-- need to write conditional render based off of if this chord is added to this user's DB as a favorite -->
 <button class="Btn Btn-Primary">Add to My Chords</button>
 <button class="Btn Btn-Primary">Delete from My Chords</button>
