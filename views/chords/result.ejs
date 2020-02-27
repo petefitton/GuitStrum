@@ -18,7 +18,7 @@
   <% if (typeof user.chords == 'object' && user.chords) { %>
     <% if (user.chords.filter(chord => chord.imageChordName == chordName).length > 0) { %>
       <!-- should use method override to delete -->
-      <form action="" method="post">
+      <form method="post" action="/chords/<%= chordName %>/?_method=DELETE">
         <input type="hidden" name="chordName" value="<%= chordName %>">
         <button class="Btn Btn-Primary">Delete from My Chords</button>
       </form>

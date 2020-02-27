@@ -76,7 +76,7 @@ router.get('/', (req, res) => {
       }
     }).then((user) => {
       console.log('😇 This is the user object:');
-      console.log(user.chords[0].chordName);
+      console.log(user.chords[0].colloqChordName);
       res.render('chords/index', { user });
     })
   } else {
@@ -182,8 +182,14 @@ router.get('/result', (req, res) => {
 });
 
 // deletes a specific chord from favorites
-router.delete('/:id', isLoggedIn, (req, res) => {
-  res.redirect('chords/index');
+router.delete('/:chordName', isLoggedIn, (req, res) => {
+  db.chord.destroy({
+    where: {
+      colloqChordName: req.params.chordName
+    }
+  }).then(() => {
+    res.redirect('/chords');
+  });
 });
 
 module.exports = router;
