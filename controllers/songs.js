@@ -1,8 +1,10 @@
 const express = require('express');
 const router = express.Router();
 const db = require('../models');
+const axios = require('axios');
 const passport = require('../config/ppConfig');
 const isLoggedIn = require('../middleware/isLoggedIn');
+const chordNameScripts = require('../controllers/chordNameScripts.js')
 
 // HOME page for songs site - shows list of public songs, list of private songs
 router.get('/', (req, res) => {
@@ -68,8 +70,132 @@ router.get('/edit/:id', isLoggedIn, (req, res) => {
 });
 
 // submits the second page of song creation NOT the edited song
-router.post('/:id', isLoggedIn, (req, res) => {
-  res.redirect('/songs/show');
+router.put('/:id', isLoggedIn, (req, res) => {
+  db.song.update({
+    name: req.body.songName,
+    // ideally would have, but for the moment not including - instanceCount: instanceCount,
+    // same here - public: req.body.pubPriv,
+  }, { where: { id: req.params.id }
+  // need to include connecting information about songsUsers as well
+  }).then(() => {
+    db.song.findOne({
+      where: {
+        id: req.params.id
+      }
+    }).then(song => {
+
+      // start a loop that iterates over every instance count that song contains
+        // first remove all spaces from instance chord name
+        // then search for the chordId of the chord contained in the instance
+          // include what to do when instance is an empty string
+        // if the chord does not exist in the chord DB table, then:
+          // do an axios call and add that chord to the chord DB with no associated user
+        // create each instance in the instance DB table
+        // do a timeout function before redirecting for now, can also look into async
+      console.log('😆Test4')
+      // console.log(song)
+      for (let i = 1; i <= (song.instanceCount); i++) {
+        let chordNum = "chord" + i;
+        // console.log(req.body.chord1)
+        // console.log(req.body.chordNum) THIS DOES NOT WORK
+        // console.log(req.body[chordNum])
+        let noSpaceInstance
+        if (req.body[chordNum] == '') {
+          noSpaceInstance = ''
+        } else {
+          noSpaceInstance = req.body[chordNum].replace(/\s/g, '');
+        }
+        if (noSpaceInstance == '') {
+          // do nothing
+        } else {
+          db.chord.findOne({
+            where: {
+              colloqChordName: noSpaceInstance
+            }
+          }).then(chord => {
+          // return is null if not found
+            if (chord === null) {
+              let chordNameSearch = chordNameScripts.chordNameUnderscore(req.body[chordNum]);
+              axios.get(`https://api.uberchord.com/v1/chords/${chordNameSearch}`, {
+              }).then(function(apiResponse) {
+                let newChordName = chordNameScripts.addHash(req.body[chordNum]);
+                db.chord.create({
+                  strings: apiResponse.data[0].strings,
+                  fingering: apiResponse.data[0].fingering,
+                  colloqChordName: newChordName,
+                  apiSearchChordName: chordNameSearch,
+                  imageChordName: req.body[chordNum] // should have %23 but no underscores
+                }).then(chord => {
+                  console.log(chord);
+                  console.log(i);
+                  // create instance with the correct chordId
+                  db.instance.findOne({
+                    where: {
+                      songId: song.id,
+                      location: i
+                    }
+                  }).then(instance => {
+                    if (instance) {
+                      db.instance.update(
+                        {
+                          chordId: chord.id
+                        }, {
+                          where: { songId: song.id }
+                        }
+                      ).catch(err=>console.log(err));
+                    } else {
+                      db.instance.create({
+                        chordId: chord.id,
+                        songId: song.id,
+                        location: i // location of instance in song
+                      }).catch(err=>console.log(err));
+                    }
+                  }).catch(err=>console.log(err));
+                }).catch(err=>console.log(err));
+              }).catch(err=>console.log(err));
+            } else {
+              // if the chord does exist in the chord table, then:
+              console.log('this should be the number of i at this point in code:');
+              console.log(i);
+              // if the instance exists, update it, otherwise create it
+              db.instance.findOne({
+                where: {
+                  songId: song.id,
+                  location: i
+                }
+              }).then(instance => {
+                if (instance) {
+                  db.instance.update(
+                    {
+                      chordId: chord.id
+                    }, {
+                      where: { songId: song.id }
+                    }
+                  ).catch(err=>console.log(err));
+                } else {
+                  db.instance.create({
+                    chordId: chord.id,
+                    songId: song.id,
+                    location: i // location of instance in song
+                  }).catch(err=>console.log(err));
+                }
+              }).catch(err=>console.log(err));
+            }
+          }).catch(err=>console.log(err));
+        }
+      }
+    }).catch(err=>console.log(err));
+    // possibly create a timeout function to move forward
+    setTimeout(function() {
+      db.song.findOne({
+        where: {
+          name: req.body.songName
+        }, include: [db.instance]
+      }).then(song => {
+        res.redirect(`/songs/${song.id}`);
+      }).catch(err => console.log(err));
+    }, 5000)
+  }).catch(err=>console.log(err));
 });
 
 // shows a single song
@@ -84,10 +210,10 @@ router.get('/:id', (req, res) => {
 });
 
 // updates a song (both the song table and the instance table)
-router.put('/:id', isLoggedIn, (req, res) => {
+// router.put('/:id', isLoggedIn, (req, res) => {
   // this should redirect to the song at the ID that was edited
-  res.redirect(`/songs/${song.id}`);
-});
+//   res.redirect(`/songs/${song.id}`);
+// });
 
 // deletes a song from the DB (both from song and instance tables)
 router.delete('/', isLoggedIn, (req, res) => {

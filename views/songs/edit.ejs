@@ -1,5 +1,5 @@
 <!-- form action should add song id in place of word test below -->
-<form method="POST" action="/songs/test" id="songEditForm">
+<form method="POST" action="/songs/<%= song.id %>/?_method=PUT" id="songEditForm">
   <div class="row">
     <div class="col s3"></div>
     <div class="input-field col s6">
@@ -27,6 +27,7 @@
 
 
 
+  <% if ((song.timeSig == "4 4") && (song.chordCadence == "4")) { %>
   <div class="row">
     <div class="input-field col s1">
       <img class="time44" src="https://mymusiconline.co.uk/wp-content/uploads/graphics_png/time_sign_44.png" alt="">
@@ -35,7 +36,9 @@
       |
     </div>
     <% let k = 1 %>
-      <% for (var i = 0; i < 12; i = i + 4) { %>
+    <!-- instanceCount converted to four instances per measure, assuming minimum eight measures for
+    section of code lower down, dividing by 2 because of loop inside that contains var h that loops twice -->
+      <% for (var i = 0; i < ((song.instanceCount/4) + 2); i = i + 4) { %>
         <% for (var h = 0; h < 2; h++) { %>
           <% for (var j = 0; j < 4; j++) { %>
     <div class="input-field col s1">
@@ -55,27 +58,27 @@
       |
     </div>
       <% } %>
-        <% for (var j = 0; j < 4; j++) { %>
-  <div class="input-field col s1">
-    <input type="text" name="chord<%= k %>" id="chord<%= k %>">
-  </div>
-          <% k++ %>
-        <% } %>
-  <div class="input-field col s1 barIcon">
-    |
-  </div>
-  <% for (var j = 0; j < 4; j++) { %>
+      <% for (var j = 0; j < 4; j++) { %>
     <div class="input-field col s1">
       <input type="text" name="chord<%= k %>" id="chord<%= k %>">
     </div>
-            <% k++ %>
-            <% console.log(k) %>
-          <% } %>
-  <div class="input-field col s1 barIcon">
-    ||
-  </div>
+        <% k++ %>
+      <% } %>
+    <div class="input-field col s1 barIcon">
+      |
+    </div>
+    <% for (var j = 0; j < 4; j++) { %>
+    <div class="input-field col s1">
+      <input type="text" name="chord<%= k %>" id="chord<%= k %>">
+    </div>
+      <% k++ %>
+    <% } %>
+    <div class="input-field col s1 barIcon">
+      ||
+    </div>
     
   </div>
+  <% } %>
 </form>
 
 <!-- form for deleting song -->
