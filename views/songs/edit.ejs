@@ -3,7 +3,7 @@
   <div class="row">
     <div class="col s3"></div>
     <div class="input-field col s6">
-      <input type="search" name="songName" id="songName" value="Song Title" class="center-align">
+      <input type="search" name="songName" id="songName" value="<%= song.name %>" class="center-align">
     </div>
     <div class="col s1"></div>
     <!-- <div class="input-field col s2">
@@ -34,36 +34,19 @@
     <div class="input-field col s1 barIcon">
       |
     </div>
+    <% let k = 1 %>
+      <% for (var i = 0; i < 12; i = i + 4) { %>
+        <% for (var h = 0; h < 2; h++) { %>
+          <% for (var j = 0; j < 4; j++) { %>
     <div class="input-field col s1">
-      <input type="text" name="chord1" id="chord1">
+      <input type="text" name="chord<%= k %>" id="chord<%= k %>">
     </div>
-    <div class="input-field col s1">
-      <input type="text" name="chord1" id="chord1">
-    </div>
-    <div class="input-field col s1">
-      <input type="text" name="chord1" id="chord1">
-    </div>
-    <div class="input-field col s1">
-      <input type="text" name="chord1" id="chord1">
-    </div>
+            <% k++ %>
+          <% } %>
     <div class="input-field col s1 barIcon">
       |
     </div>
-    <div class="input-field col s1">
-      <input type="text" name="chord1" id="chord1">
-    </div>
-    <div class="input-field col s1">
-      <input type="text" name="chord1" id="chord1">
-    </div>
-    <div class="input-field col s1">
-      <input type="text" name="chord1" id="chord1">
-    </div>
-    <div class="input-field col s1">
-      <input type="text" name="chord1" id="chord1">
-    </div>
-    <div class="input-field col s1 barIcon">
-      |
-    </div>
+        <% } %>
   </div>
   <div class="row">
     <div class="input-field col s1">
@@ -71,110 +54,27 @@
     <div class="input-field col s1 barIcon">
       |
     </div>
-    <div class="input-field col s1">
-      <input type="text" name="chord1" id="chord1">
-    </div>
-    <div class="input-field col s1">
-      <input type="text" name="chord1" id="chord1">
-    </div>
-    <div class="input-field col s1">
-      <input type="text" name="chord1" id="chord1">
-    </div>
-    <div class="input-field col s1">
-      <input type="text" name="chord1" id="chord1">
-    </div>
-    <div class="input-field col s1 barIcon">
-      |
-    </div>
-    <div class="input-field col s1">
-      <input type="text" name="chord1" id="chord1">
-    </div>
-    <div class="input-field col s1">
-      <input type="text" name="chord1" id="chord1">
-    </div>
-    <div class="input-field col s1">
-      <input type="text" name="chord1" id="chord1">
-    </div>
-    <div class="input-field col s1">
-      <input type="text" name="chord1" id="chord1">
-    </div>
-    <div class="input-field col s1 barIcon">
-      |
-    </div>
+      <% } %>
+        <% for (var j = 0; j < 4; j++) { %>
+  <div class="input-field col s1">
+    <input type="text" name="chord<%= k %>" id="chord<%= k %>">
   </div>
-  <div class="row">
-    <div class="input-field col s1">
-    </div>
-    <div class="input-field col s1 barIcon">
-      |
-    </div>
-    <div class="input-field col s1">
-      <input type="text" name="chord1" id="chord1">
-    </div>
-    <div class="input-field col s1">
-      <input type="text" name="chord1" id="chord1">
-    </div>
-    <div class="input-field col s1">
-      <input type="text" name="chord1" id="chord1">
-    </div>
-    <div class="input-field col s1">
-      <input type="text" name="chord1" id="chord1">
-    </div>
-    <div class="input-field col s1 barIcon">
-      |
-    </div>
-    <div class="input-field col s1">
-      <input type="text" name="chord1" id="chord1">
-    </div>
-    <div class="input-field col s1">
-      <input type="text" name="chord1" id="chord1">
-    </div>
-    <div class="input-field col s1">
-      <input type="text" name="chord1" id="chord1">
-    </div>
-    <div class="input-field col s1">
-      <input type="text" name="chord1" id="chord1">
-    </div>
-    <div class="input-field col s1 barIcon">
-      |
-    </div>
+          <% k++ %>
+        <% } %>
+  <div class="input-field col s1 barIcon">
+    |
   </div>
-  <div class="row">
+  <% for (var j = 0; j < 4; j++) { %>
     <div class="input-field col s1">
+      <input type="text" name="chord<%= k %>" id="chord<%= k %>">
     </div>
-    <div class="input-field col s1 barIcon">
-      |
-    </div>
-    <div class="input-field col s1">
-      <input type="text" name="chord1" id="chord1">
-    </div>
-    <div class="input-field col s1">
-      <input type="text" name="chord1" id="chord1">
-    </div>
-    <div class="input-field col s1">
-      <input type="text" name="chord1" id="chord1">
-    </div>
-    <div class="input-field col s1">
-      <input type="text" name="chord1" id="chord1">
-    </div>
-    <div class="input-field col s1 barIcon">
-      |
-    </div>
-    <div class="input-field col s1">
-      <input type="text" name="chord1" id="chord1">
-    </div>
-    <div class="input-field col s1">
-      <input type="text" name="chord1" id="chord1">
-    </div>
-    <div class="input-field col s1">
-      <input type="text" name="chord1" id="chord1">
-    </div>
-    <div class="input-field col s1">
-      <input type="text" name="chord1" id="chord1">
-    </div>
-    <div class="input-field col s1 barIcon">
-      |
-    </div>
+            <% k++ %>
+            <% console.log(k) %>
+          <% } %>
+  <div class="input-field col s1 barIcon">
+    ||
+  </div>
+    
   </div>
 </form>
 

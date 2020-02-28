@@ -2,6 +2,12 @@
 module.exports = (sequelize, DataTypes) => {
   const song = sequelize.define('song', {
     userId: DataTypes.INTEGER,
+    name: {
+      type: DataTypes.STRING,
+      validate: {
+        notEmpty: true
+      }
+    },
     timeSig: {
       type: DataTypes.STRING,
       validate: {
@@ -16,15 +22,9 @@ module.exports = (sequelize, DataTypes) => {
     },
     instanceCount: {
       type: DataTypes.NUMERIC
-      // validate: {
-      //   notNull: true
-      // }
     },
     public: {
       type: DataTypes.BOOLEAN
-      // validate: {
-      //   notNull: true
-      // }
     }
   }, {});
   song.associate = function(models) {

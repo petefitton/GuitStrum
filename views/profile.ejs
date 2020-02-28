@@ -13,18 +13,31 @@
 <!-- <a href="/">Home</a> -->
 
 <div class="row">
-  <div class="col s4 offset-s1">
+  <div class="col s3 offset-s1">
     <h3>My Chords:</h3>
+    <!-- for each chord that user has through ChordsUsers -->
+    <% if (typeof user == 'object' && user) { %>
+      <% if (typeof user.chords == 'object' && user.chords) { %>
+        <% user.chords.forEach(function(chord) { %>
+          <p><a href="/chords/result?chordSearch=<%= chord.imageChordName %>"><%= chord.colloqChordName %></a></p>
+        <% }) %>
+      <% } %>
+    <% } %>
+  </div>
+
+  <div class="col s3 offset-s1">
+    <h3>My Songs:</h3>
     <p>Example song</p>
     <p>Example song</p>
     <p>Example song</p>
   </div>
 
-  <div class="col s4">
-    <h3>My Songs:</h3>
-    <p>Example song</p>
-    <p>Example song</p>
-    <p>Example song</p>
+  <div class="col s3">
+    <form action="/chords/result" method="get">
+      <!-- <label for="chordSearch">Search for Chord:</label> -->
+      <input type="search" name="chordSearch" id="chordSearch" placeholder="Search for Chord">
+      <button type="submit">SEARCH</button>
+    </form>
   </div>
 
   <!-- This search functionality will only come into play if I have a search land page and can integrate a search -->

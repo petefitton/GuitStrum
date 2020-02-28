@@ -59,7 +59,14 @@ app.get('/', function(req, res) {
 
 app.get('/profile/:id', isLoggedIn, function(req, res) {
   // console.log(req.user.dataValues);
-  res.render('profile', { user: req.user.dataValues });
+  db.user.findOne({
+    include: [db.chord],
+    where: {
+      email: req.user.email
+    }
+  }).then((user) => {
+    res.render('profile', { user });
+  }).catch(err => {console.log(err)});
 });
 
 app.use('/auth', require('./controllers/auth'));

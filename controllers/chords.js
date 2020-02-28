@@ -110,7 +110,7 @@ router.post('/', isLoggedIn, (req, res) => {
         userId: req.user.id,
         chordId: chord.id
       }).then(() => {
-          res.redirect(`chords/result?chordSearch=${req.body.chordName}`);
+          res.redirect(`/chords/result?chordSearch=${req.body.chordName}`);
       }).catch(err => {console.log(err)});
     });
   });

@@ -1,7 +1,7 @@
 <div class="container">
   <h1>New Song Set-Up Form:</h1>
 
-  <form method="POST" action="/songs/new/test" id="newSongFormOne">
+  <form method="POST" action="/songs/new/song" id="newSongFormOne">
     <div class="row">
       <div class="input-field col s6">
         <input type="search" name="songName" id="songName">
@@ -11,25 +11,25 @@
       <div class="input-field col s3">
         <select name = "timeSig" id = "timeSig">
           <option value = "4 4" selected>4/4</option>
-          <option value = "3 4">3/4</option>
-          <option value = "6 8">6/8</option>
+          <!-- <option value = "3 4">3/4</option>
+          <option value = "6 8">6/8</option> -->
         </select>
         <label for="timeSig">Time Signature</label>
       </div>
 
       <div class="input-field col s3">
-        <select name = "chordCad" id = "chordCad">
-          <option value = "1">Whole Notes</option>
-          <option value = "2">Half Notes</option>
+        <select name = "chordCadence" id = "chordCadence">
+          <!-- <option value = "1">Whole Notes</option>
+          <option value = "2">Half Notes</option> -->
           <option value = "4" selected>Quarter Notes</option>
-          <option value = "8">Eighth Notes</option>
+          <!-- <option value = "8">Eighth Notes</option> -->
         </select>
-        <label for="chordCad">Chord Cadence</label>
+        <label for="chordCadence">Chord Cadence</label>
       </div>
     </div>
     <div class="row">
       <div class="input-field col s3">
-        <input type="number" name="measureNumber" id="measureNumber" value='32'>
+        <input type="number" name="measureNumber" id="measureNumber" value="32">
         <label for="measureNumber">Number of measures</label>
       </div>
       <div class="col s3">
@@ -37,7 +37,7 @@
       <div class="input-field col s3">
         <p>
           <label>
-            <input name="pubPriv" type="radio" checked />
+            <input name="pubPriv" type="radio" value="false" checked />
             <span>Private</span>
           </label>
         </p>
@@ -45,8 +45,8 @@
       <div class="input-field col s3">
         <p>
           <label>
-            <input name="pubPriv" type="radio" />
-            <span>Public</span>
+            <!-- <input name="pubPriv" type="radio" value="true" />
+            <span>Public</span> -->
           </label>
         </p>
       </div>
