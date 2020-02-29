@@ -1,15 +1,74 @@
 <!-- <h1>This page shows a single song. Has an edit button and a delete button. Displays song and some song information.</h1> -->
 <div class="row">
-  <div class="col s1"></div>
-  <div class="col s10">
-    <h1 class="center-align h1MargTopLower">Song Title</h1>
+</div>
+<div class="row">
+  <div class="col s2">
+    <form action="/songs/edit/<%= instances[0].song.id %>" method="get">
+      <button type="submit" class="waves-effect waves-light btn-large">EDIT</button>
+    </form>
   </div>
-  <div class="col s1">
+  <div class="col s7 offset-s1">
+    <h1 class="center-align h1MargTopLower"><%= instances[0].song.name %></h1>
+  </div>
+  <div class="col s1 offset-s1">
     <h6>Public</h6>
   </div>
 </div>
 
-<div class="row">
+<% if ((instances[0].song.timeSig == "4 4") && (instances[0].song.chordCadence == "4")) { %>
+  <div class="row">
+    <div class="input-field col s1">
+      <img class="time44" src="https://mymusiconline.co.uk/wp-content/uploads/graphics_png/time_sign_44.png" alt="">
+    </div>
+    <div class="input-field col s1 barIcon">
+      |
+    </div>
+    <% let k = 1 %>
+    <!-- instanceCount converted to four instances per measure, assuming minimum eight measures for
+    section of code lower down, dividing by 2 because of loop inside that contains var h that loops twice -->
+      <% for (var i = 0; i < ((instances[0].song.instanceCount/4) + 2); i = i + 4) { %>
+        <% for (var h = 0; h < 2; h++) { %>
+          <% for (var j = 0; j < 4; j++) { %>
+    <div class="input-field col s1">
+      <p><% for (instance of instances) { if (instance.location == k) {%><%= instance.chord.colloqChordName %><%}}%></p>
+    </div>
+            <% k++ %>
+          <% } %>
+    <div class="input-field col s1 barIcon">
+      |
+    </div>
+        <% } %>
+  </div>
+  <div class="row">
+    <div class="input-field col s1">
+    </div>
+    <div class="input-field col s1 barIcon">
+      |
+    </div>
+      <% } %>
+      <% for (var j = 0; j < 4; j++) { %>
+    <div class="input-field col s1">
+      <p><% for (instance of instances) { if (instance.location == k) {%><%= instance.chord.colloqChordName %><%}}%></p>
+    </div>
+        <% k++ %>
+      <% } %>
+    <div class="input-field col s1 barIcon">
+      |
+    </div>
+    <% for (var j = 0; j < 4; j++) { %>
+    <div class="input-field col s1">
+      <p><% for (instance of instances) { if (instance.location == k) {%><%= instance.chord.colloqChordName %><%}}%></p>
+    </div>
+      <% k++ %>
+    <% } %>
+    <div class="input-field col s1 barIcon">
+      ||
+    </div>
+    
+  </div>
+  <% } %>
+
+<!-- <div class="row">
   <div class="col s1">
     <div class="right-align">
       <img class="time44" src="https://mymusiconline.co.uk/wp-content/uploads/graphics_png/time_sign_44.png" alt="">
@@ -165,7 +224,7 @@
   <div class="col s1 barIcon">
     ||
   </div>
-</div>
+</div> -->
 
 
 <!-- Song should not be deletable unless the owner is accessing it -->
@@ -175,8 +234,9 @@
 <div class="row">
   <!-- <div class="input-field col s2">
   </div> -->
-  <button class="btn red darken-4 waves-effect waves-light left" type="submit" form="">DELETE
-  </button>
+  <div class="col s3 offset-s1">
+    <button class="btn red darken-4 waves-effect waves-light" type="submit" form="">DELETE</button>
+  </div>
   <!-- <div class="col s3">
   </div> -->
 </div>

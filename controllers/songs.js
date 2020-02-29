@@ -59,13 +59,19 @@ router.post('/new/song', isLoggedIn, (req, res) => {
 router.get('/edit/:id', isLoggedIn, (req, res) => {
   console.log('😆Test5')
   db.song.findOne({
-    include: [db.user],
     where: {
       id: req.params.id
     }
   }).then(song => {
-    console.log('😆Test6')
-    res.render('songs/edit', { song });
+    db.instance.findAll({
+      include: [db.chord],
+      where: {
+        songId: req.params.id
+      }
+    }).then(instances => {
+      console.log('😆Test6')
+      res.render('songs/edit', { song, instances, user: req.user });
+    })
   })
 });
 
@@ -83,7 +89,6 @@ router.put('/:id', isLoggedIn, (req, res) => {
         id: req.params.id
       }
     }).then(song => {
-
       // start a loop that iterates over every instance count that song contains
         // first remove all spaces from instance chord name
         // then search for the chordId of the chord contained in the instance
@@ -99,18 +104,25 @@ router.put('/:id', isLoggedIn, (req, res) => {
         // console.log(req.body.chord1)
         // console.log(req.body.chordNum) THIS DOES NOT WORK
         // console.log(req.body[chordNum])
-        let noSpaceInstance
+        let noSpaceChordName
         if (req.body[chordNum] == '') {
-          noSpaceInstance = ''
+          noSpaceChordName = ''
         } else {
-          noSpaceInstance = req.body[chordNum].replace(/\s/g, '');
+          noSpaceChordName = req.body[chordNum].replace(/\s/g, '');
         }
-        if (noSpaceInstance == '') {
-          // do nothing
+        if (noSpaceChordName == '') {
+          // do nothing EXCEPT DELETE if the instance had previously held a chord at that location
+          console.log('😍😍')
+          db.instance.destroy({
+            where: {
+              location: i,
+              songId: song.id
+            }
+          }).catch(err=>console.log(err));
         } else {
           db.chord.findOne({
             where: {
-              colloqChordName: noSpaceInstance
+              colloqChordName: noSpaceChordName
             }
           }).then(chord => {
           // return is null if not found
@@ -169,7 +181,10 @@ router.put('/:id', isLoggedIn, (req, res) => {
                     {
                       chordId: chord.id
                     }, {
-                      where: { songId: song.id }
+                      where: {
+                        songId: song.id,
+                        location: i
+                      }
                     }
                   ).catch(err=>console.log(err));
                 } else {
@@ -206,7 +221,16 @@ router.get('/:id', (req, res) => {
   } else {
     userData = [];
   }
-  res.render('songs/show', { user: userData });
+  db.instance.findAll({
+    include: [db.chord, db.song],
+    where: {
+      songId: req.params.id
+    }
+  }).then(instances => {
+    console.log(instances[0].location);
+    console.log('this is song info directly above');
+    res.render('songs/show', { user: userData, instances });
+  }).catch(err=>console.log(err));
 });
 
 // updates a song (both the song table and the instance table)

@@ -19,7 +19,7 @@ router.get('/', (req, res) => {
       }
     }).then((user) => {
       console.log('😇 This is the user object:');
-      console.log(user.chords[0].colloqChordName);
+      // console.log(user.chords[0].colloqChordName);
       res.render('chords/index', { user });
     })
   } else {
@@ -29,7 +29,7 @@ router.get('/', (req, res) => {
 
 // adds a chord to favorites
 router.post('/', isLoggedIn, (req, res) => {
-  let chordNameSearch = chordNameUnderscore(req.body.chordName);
+  let chordNameSearch = chordNameScripts.chordNameUnderscore(req.body.chordName);
   axios.get(`https://api.uberchord.com/v1/chords/${chordNameSearch}`, {
   }).then(function(apiResponse) {
     console.log("API RESPONSE DATA: ");
@@ -54,9 +54,9 @@ router.post('/', isLoggedIn, (req, res) => {
         chordId: chord.id
       }).then(() => {
           res.redirect(`/chords/result?chordSearch=${req.body.chordName}`);
-      }).catch(err => {console.log(err)});
-    });
-  });
+      }).catch(err => res.send({ "error" : err}));
+    }).catch(err => res.send({ "error" : err}));
+  }).catch(err => res.send({ "error" : err}));
 });
 
 // shows a specific chord - has search bar on this page
@@ -114,7 +114,7 @@ router.get('/result', (req, res) => {
           // update image link with correct chord name, string-numbers, and fingering-numbers & render page
           let source = `https://chordgenerator.net/${chord.chordName}.png?p=${chord.cutStrings}&f=${chord.dashFingering}&s=5`
           res.render('chords/result', { source: source, user: user, chordName: chord.chordName });
-        })
+        }).catch(err => res.send({ "error" : err}));
       } else {
         console.log('test8')
         let source = `https://chordgenerator.net/${chord.chordName}.png?p=${chord.cutStrings}&f=${chord.dashFingering}&s=5`
@@ -126,13 +126,25 @@ router.get('/result', (req, res) => {
 
 // deletes a specific chord from favorites
 router.delete('/:chordName', isLoggedIn, (req, res) => {
-  db.chord.destroy({
+  console.log(req.params.chordName)
+  console.log('that is the chordName from the request')
+  db.chord.findOne({
     where: {
       colloqChordName: req.params.chordName
     }
-  }).then(() => {
-    res.redirect('/chords');
-  });
+  }).then(chord => {
+    console.log(req.user.id)
+    console.log(chord.id)
+    console.log('that is the user id and the chord id directly above')
+    db.chordsusers.destroy({
+      where: {
+        userId: req.user.id,
+        chordId: chord.id
+      }
+    }).then(() => {
+      res.redirect('/chords');
+    }).catch(err => res.send({ "error" : err}));
+  }).catch(err => res.send({ "error" : err}));
 });
 
 module.exports = router;

@@ -39,3 +39,17 @@ footer {
 .h1MargTopLower {
     margin-top: 27px;
 }
+
+.linkedIn {
+    width: 16px;
+    height: 16px;
+    text-align: center;
+    margin-right: 10px;
+    border-radius: 15%;
+    line-height: 17px;
+    margin-top: 3px;
+}
+
+.chordImg {
+    margin-top: 10px;
+}

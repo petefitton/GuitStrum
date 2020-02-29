@@ -4,7 +4,11 @@ const db = require('../models');
 const passport = require('../config/ppConfig');
 
 router.get('/signup', (req, res) => {
-  res.render('auth/signup');
+  if (req.user) {
+    res.redirect('/');
+  } else {
+    res.render('auth/signup');
+  }
 });
 
 router.post('/signup', (req, res) => {
@@ -39,7 +43,11 @@ router.post('/signup', (req, res) => {
 });
 
 router.get('/login', (req, res) => {
-  res.render('auth/login');
+  if (req.user) {
+    res.redirect('/');
+  } else {
+    res.render('auth/login');
+  }
 });
 
 router.post('/login', passport.authenticate('local', {
