@@ -11,7 +11,7 @@
     <h1 class="center-align h1MargTopLower"><%= instances[0].song.name %></h1>
   </div>
   <div class="col s1 offset-s1">
-    <h6>Public</h6>
+    <h6><% if (instances[0].song.public) { %> Public <% } else { %> Private <% } %></h6>
   </div>
 </div>
 

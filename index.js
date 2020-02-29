@@ -60,7 +60,7 @@ app.get('/', function(req, res) {
 app.get('/profile/:id', isLoggedIn, function(req, res) {
   // console.log(req.user.dataValues);
   db.user.findOne({
-    include: [db.chord],
+    include: [db.chord, db.song],
     where: {
       email: req.user.email
     }

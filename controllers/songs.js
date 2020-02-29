@@ -79,6 +79,7 @@ router.get('/edit/:id', isLoggedIn, (req, res) => {
 router.put('/:id', isLoggedIn, (req, res) => {
   db.song.update({
     name: req.body.songName,
+    public: req.body.pubPriv
     // ideally would have, but for the moment not including - instanceCount: instanceCount,
     // same here - public: req.body.pubPriv,
   }, { where: { id: req.params.id }
@@ -227,7 +228,7 @@ router.get('/:id', (req, res) => {
       songId: req.params.id
     }
   }).then(instances => {
-    console.log(instances[0].location);
+    console.log(instances[0].song.public);
     console.log('this is song info directly above');
     res.render('songs/show', { user: userData, instances });
   }).catch(err=>console.log(err));

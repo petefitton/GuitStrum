@@ -1,6 +1,7 @@
 <div class="container">
-  <h1>New Song Set-Up Form:</h1>
-
+  <h1 class="center-align">Create Song:</h1>
+  <div class="col s4 offset-s1 topMarg72">
+  </div>
   <form method="POST" action="/songs/new/song" id="newSongFormOne">
     <div class="row">
       <div class="input-field col s6">
@@ -44,7 +45,7 @@
       <div class="input-field col s3">
         <p>
           <label>
-            <input name="pubPriv" type="radio" value="false" checked />
+            <input name="pubPriv" type="radio" value="false" />
             <span>Private</span>
           </label>
         </p>
@@ -52,8 +53,8 @@
       <div class="input-field col s3">
         <p>
           <label>
-            <!-- <input name="pubPriv" type="radio" value="true" />
-            <span>Public</span> -->
+            <input name="pubPriv" type="radio" value="true" checked />
+            <span>Public</span>
           </label>
         </p>
       </div>
@@ -61,4 +62,6 @@
       </button>
     </div>
   </form>
+</div>
+<div class="col s4 offset-s1 topMarg72">
 </div>

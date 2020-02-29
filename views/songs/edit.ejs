@@ -11,13 +11,13 @@
     <div class="input-field col s2">
       <p>
         <label>
-          <input name="pubPriv" type="radio" />
+          <input name="pubPriv" type="radio" value="true" <% if (song.public) { %> checked <% } %> />
           <span>Public</span>
         </label>
       </p>
       <p>
         <label>
-          <input name="pubPriv" type="radio" checked />
+          <input name="pubPriv" type="radio" value="false" <% if (!song.public) { %> checked <% } %> />
           <!-- Conditional render should determine which radio button is automatically checked -->
           <span>Private</span>
         </label>
