@@ -15,10 +15,16 @@ router.get('/', (req, res) => {
         email: req.user.email
       }
     }).then((user) => {
-      res.render('songs/index', { user });
+      db.song.findAll({
+      }).then(songs => {
+        res.render('songs/index', { user, songs });
+      }).catch(err => {console.log(err)});
     }).catch(err => {console.log(err)});
   } else {
-    res.render('songs/index');
+    db.song.findAll({
+    }).then(songs => {
+      res.render('songs/index', { songs });
+    }).catch(err => {console.log(err)});
   }
 });
 
@@ -210,7 +216,7 @@ router.put('/:id', isLoggedIn, (req, res) => {
       }).then(song => {
         res.redirect(`/songs/${song.id}`);
       }).catch(err => console.log(err));
-    }, 5000)
+    }, 3000)
   }).catch(err=>console.log(err));
 });
 

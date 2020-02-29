@@ -2,7 +2,7 @@
 
 <div class="row">
   <div class="col s4 offset-s1">
-    <h3>Public Songs:</h3>
+    <h3>My Songs:</h3>
     <!-- for each song that user has through songsUsers -->
     <% if (typeof user == 'object' && user) { %>
       <% if (typeof user.songs == 'object' && user.songs) { %>
@@ -11,16 +11,13 @@
         <% }) %>
       <% } %>
     <% } %>
-    <p>Example song</p>
-    <p>Example song</p>
-    <p>Example song</p>
   </div>
 
   <div class="col s4">
-    <h3>Private Songs:</h3>
-    <p>Example song</p>
-    <p>Example song</p>
-    <p>Example song</p>
+    <h3>All Songs:</h3>
+    <% songs.forEach(function(song) { %>
+      <p><a href="/songs/<%= song.id %>"><%= song.name %></a></p>
+    <% }) %>
     <ul>
       <!-- iterate with for each in ejs to create an li tag with a href equal to the song's url location -->
       <li><a href="">EJS to List title</a></li>
