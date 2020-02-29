@@ -136,7 +136,7 @@ router.delete('/:chordName', isLoggedIn, (req, res) => {
     console.log(req.user.id)
     console.log(chord.id)
     console.log('that is the user id and the chord id directly above')
-    db.chordsusers.destroy({
+    db.chordsUsers.destroy({
       where: {
         userId: req.user.id,
         chordId: chord.id
