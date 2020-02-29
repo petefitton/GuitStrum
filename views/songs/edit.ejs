@@ -87,8 +87,7 @@
 <div class="row">
   <!-- <div class="input-field col s2">
   </div> -->
-  <button class="btn red darken-4 waves-effect waves-light left" type="submit" form="">DELETE
-  </button>
+  <a class="modal-trigger btn red darken-4 waves-effect waves-light left" href="#modalDelete">DELETE</a>
   <!-- <div class="col s3">
   </div> -->
   <button class="btn waves-effect waves-light right" type="submit" form="songEditForm">Publish
@@ -96,3 +95,19 @@
   </button>
 </div>
 
+
+
+<!-- Modal Structure -->
+<div id="modalDelete" class="modal">
+  <div class="modal-content">
+    <h4>CONFIRM</h4>
+    <div class="divider"></div>
+    <p>Are you sure you want to delete this song?</p>
+  </div>
+  <div class="modal-footer">
+    <form method="post" action="/songs/<%= song.id %>/?_method=DELETE">
+      <button type="submit" class="red btn waves-effect waves-red">Confirm Delete</button>
+      <a href="#!" class="modal-close btn-flat">Cancel</a>
+    </form>
+  </div>
+</div>

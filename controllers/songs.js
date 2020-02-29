@@ -241,8 +241,14 @@ router.get('/:id', (req, res) => {
 // });
 
 // deletes a song from the DB (both from song and instance tables)
-router.delete('/', isLoggedIn, (req, res) => {
-  res.redirect('/songs/');
+router.delete('/:id', isLoggedIn, (req, res) => {
+  db.song.destroy({
+    where: {
+      id: req.params.id
+    }
+  }).then(() => {
+    res.redirect('/songs/');
+  }).catch(err=>console.log(err));
 });
 
 
