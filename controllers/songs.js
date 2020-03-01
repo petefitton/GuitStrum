@@ -76,18 +76,23 @@ router.post('/new/song', isLoggedIn, (req, res) => {
 router.get('/edit/:id', isLoggedIn, (req, res) => {
   db.song.findOne({
     where: {
-      id: req.params.id
+      id: req.params.id,
     }
   }).then(song => {
-    db.instance.findAll({
-      include: [db.chord],
-      where: {
-        songId: req.params.id
-      }
-    }).then(instances => {
-      res.render('songs/edit', { song, instances, user: req.user });
-    })
-  })
+    // if the song is not the same as the user, then redirect the request
+    if (song.userId !== req.user.id) {
+      res.redirect('/songs');
+    } else {
+      db.instance.findAll({
+        include: [db.chord],
+        where: {
+          songId: req.params.id
+        }
+      }).then(instances => {
+        res.render('songs/edit', { song, instances, user: req.user });
+      }).catch(err => console.log(err));
+    }
+  }).catch(err => console.log(err));
 });
 
 // submits the second page of song creation NOT the edited song
@@ -95,7 +100,7 @@ router.put('/:id', isLoggedIn, (req, res) => {
   db.song.update({
     name: req.body.songName,
     public: req.body.pubPriv
-    // ideally would have, but for the moment not including - instanceCount: instanceCount,
+    // ideally would have but for the moment not including - instanceCount: instanceCount,
     }, { where: {
       id: req.params.id
     }
@@ -115,9 +120,6 @@ router.put('/:id', isLoggedIn, (req, res) => {
         // do a timeout function before redirecting for now, can also look into async
       for (let i = 1; i <= (song.instanceCount); i++) {
         let chordNum = "chord" + i;
-        // console.log(req.body.chord1)
-        // console.log(req.body.chordNum) THIS DOES NOT WORK
-        // console.log(req.body[chordNum])
         let noSpaceChordName
         if (req.body[chordNum] == '') {
           noSpaceChordName = ''
@@ -235,7 +237,17 @@ router.get('/:id', (req, res) => {
       songId: req.params.id
     }
   }).then(instances => {
-    res.render('songs/show', { user: userData, instances });
+    if (instances[0].song.public === true) {
+      res.render('songs/show', { user: userData, instances });
+    } else if (req.user) {
+      if (req.user.id === instances[0].song.userId) {
+        res.render('songs/show', { user: userData, instances });
+      }
+      // if I implemented share feature, then I would add an else if here to continue rendering the page if the private song was shared with a different user
+      res.redirect('/songs');
+    } else {
+      res.redirect('/songs');
+    }
   }).catch(err=>console.log(err));
 });
 

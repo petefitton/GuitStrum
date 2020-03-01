@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const db = require('../models');
 const passport = require('../config/ppConfig');
+const isLoggedIn = require('../middleware/isLoggedIn');
 
 router.get('/signup', (req, res) => {
   if (req.user) {
@@ -12,8 +13,6 @@ router.get('/signup', (req, res) => {
 });
 
 router.post('/signup', (req, res) => {
-  // add user to db or redirect to signup
-  // res.send(req.body);
   db.user.findOrCreate({
     where: {
       email: req.body.email
@@ -24,7 +23,6 @@ router.post('/signup', (req, res) => {
   }).then(([user, created]) => {
     if (created) {
       console.log(`User created`);
-      // res.redirect('/');
       passport.authenticate('local', {
         successRedirect: `/profile/${user.id}`,
         successFlash: 'Thanks for signing up!'
@@ -61,7 +59,6 @@ router.post('/login', passport.authenticate('local', {
       email: req.body.email
     }
   }).then( user => {
-    // console.log(user.dataValues);
     req.flash('success', 'You successfully logged in');
     req.session.save(function() {
       res.redirect(`/profile/${user.id}`);
@@ -72,7 +69,7 @@ router.post('/login', passport.authenticate('local', {
   });
 });
 
-router.get('/logout', (req, res) => {
+router.get('/logout', isLoggedIn, (req, res) => {
   req.logout();
   req.flash('success', 'You have logged out successfully');
   res.redirect('/');

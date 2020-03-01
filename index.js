@@ -47,7 +47,6 @@ app.use(function(req, res, next) {
 });
 
 app.get('/', function(req, res) {
-  // console.log(`User is ${ req.user ? req.user.name : 'not logged in'}`);
   let userData;
   if (req.user) {
     userData = req.user.dataValues
@@ -58,7 +57,6 @@ app.get('/', function(req, res) {
 });
 
 app.get('/profile/:id', isLoggedIn, function(req, res) {
-  // console.log(req.user.dataValues);
   db.user.findOne({
     include: [db.chord, db.song],
     where: {
@@ -72,9 +70,6 @@ app.get('/profile/:id', isLoggedIn, function(req, res) {
 app.use('/auth', require('./controllers/auth'));
 app.use('/chords', require('./controllers/chords'));
 app.use('/songs', require('./controllers/songs'));
-// below is for running the test file in the controllers folder
-  // we used it to test the isLoggedIn middleware without having to add the isLoggedIn middleware all throughout
-// app.use('/', isLoggedIn, require('./controllers/test'));
 
 var server = app.listen(process.env.PORT || 3000);
 

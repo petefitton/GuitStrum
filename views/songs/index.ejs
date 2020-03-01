@@ -1,11 +1,13 @@
 <!-- <h1>Home page for songs section of site. Has list of public songs and list of private songs plus a create a new song button.</h1> -->
-<div class="row botMarg0">
-  <div class="col s3 right">
-    <form action="/songs/new" method="get" id="newSongForm">
-      <button type="submit" form="newSongForm" class="orange white-text darken-4 waves-effect waves-light btn-large">Create New Song</button>
-    </form>
+<% if (typeof user == 'object' && user) { %>
+  <div class="row botMarg0">
+    <div class="col s3 right">
+      <form action="/songs/new" method="get" id="newSongForm">
+        <button type="submit" form="newSongForm" class="orange white-text darken-4 waves-effect waves-light btn-large">Create New Song</button>
+      </form>
+    </div>
   </div>
-</div>
+<% } %>
 
 <div class="row">
   <div class="col s3 offset-s1">

@@ -16,7 +16,7 @@
       <div class="nav-wrapper light-blue darken-4">
         <ul id="nav-mobile" class="left hide-on-med-and-down">
           <!-- <a class="left" href="/">GuitStrum</a> -->
-          <a href="/<% if (typeof user == 'object' && user) { %>profile/<%= user.id %><%}%>" class="brand-logo center">GuitStrum</a>
+          <a href="/<% if (typeof user == 'object' && user) { if (user.id == null) {} else {%>profile/<%= user.id %><%}}%>" class="brand-logo center">GuitStrum</a>
           <!-- <a href="/chords/">Chords</a> -->
           <li><a href="/chords/">Chords</a></li>
           <!-- <a href="/songs/">Songs</a> -->
@@ -48,7 +48,7 @@
           <div class="col l4 s12">
             <h5><a href="/" class="white-text">Home</a></h5>
             <ul>
-              <li><a href="/<% if (typeof user == 'object' && user) { %>profile/<%= user.id %><%}%>" class="grey-text text-lighten-2">My Profile</a></li>
+              <li><a href="/<% if (typeof user == 'object' && user) { if (user.id == null) {} else {%>profile/<%= user.id %><%}}%>" class="grey-text text-lighten-2">My Profile</a></li>
               <li><a class="grey-text text-lighten-2" href="/chords/">Chords</a></li>
               <li><a class="grey-text text-lighten-2" href="/songs/">Songs</a></li>
             </ul>

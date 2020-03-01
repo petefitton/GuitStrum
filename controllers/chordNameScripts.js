@@ -1,4 +1,4 @@
-//Function declarations for use in multiple routes followed by routes below
+//Function declarations for use in multiple routes
 
 let chordNameUnderscore = function(param) {
   // chordNameQuery is used within this function to convert from a colloqial chord name to the API search chord name
@@ -16,7 +16,6 @@ let chordNameUnderscore = function(param) {
     return chordNameQuery.join('');
 
   } else if (chordNameQuery[1] == ('#')) {
-    // console.log('😌😗')
     chordNameQuery = chordNameQuery.split('');
     if (chordNameQuery.length > 2) {
       chordNameQuery.splice(2, 0, '_');
@@ -25,19 +24,13 @@ let chordNameUnderscore = function(param) {
     return chordNameQuery.join('');
     
   } else if (chordNameQuery[1] == ('%')) {
-    // console.log('😊')
     chordNameQuery = chordNameQuery.split('');
     chordNameQuery.splice(4, 0, '_');
-    // chordNameQuery.splice(1, 1, '%23');
     return chordNameQuery.join('');
 
   } else if (chordNameQuery.length > 1) {
-    // console.log('Test3')
-    // console.log(chordNameQuery);
     chordNameQuery = chordNameQuery.split('');
-    // console.log(chordNameQuery);
     chordNameQuery.splice(1, 0, '_');
-    // console.log(chordNameQuery);
     return chordNameQuery.join('');
 
   } else {
