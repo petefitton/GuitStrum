@@ -8,11 +8,16 @@
 </div>
 
 <div class="row">
+  <% if (user.id == instances[0].song.userId) { %>
   <div class="col s2">
     <form action="/songs/edit/<%= instances[0].song.id %>" method="get">
       <button type="submit" class="waves-effect waves-light btn-large">EDIT</button>
     </form>
   </div>
+  <% } else { %>
+  <div class="col s2">
+  </div>
+  <% } %>
   <div class="col s7 offset-s1">
     <h1 class="center-align h1MargTopLower"><%= instances[0].song.name %></h1>
   </div>
@@ -75,18 +80,13 @@
   <% } %>
 
 <!-- Song should not be deletable unless the owner is accessing it -->
-<!-- form for deleting song -->
-<!-- <form action=""></form> -->
-
-<div class="row">
-  <!-- <div class="input-field col s2">
-  </div> -->
-  <div class="col s3">
-    <a class="modal-trigger btn red darken-4 waves-effect waves-light" href="#modalDelete">DELETE</a>
+<% if (user.id == instances[0].song.userId) { %>
+  <div class="row">
+    <div class="col s3">
+      <a class="modal-trigger btn red darken-4 waves-effect waves-light" href="#modalDelete">DELETE</a>
+    </div>
   </div>
-  <!-- <div class="col s3">
-  </div> -->
-</div>
+<% } %>
 
 
 <!-- Modals -->

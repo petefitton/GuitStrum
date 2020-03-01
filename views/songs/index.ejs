@@ -26,19 +26,4 @@
       <p><a href="/songs/<%= song.id %>"><%= song.name %></a>  by: <%= song.user.name %></p>
     <% }) %>
   </div>
-
-  <!-- <div class="col s4">
-    <h3>Others' Private Songs:</h3>
-    <% filteredSongs.forEach(song => { %>
-      <p><a href="/songs/<%= song.id %>"><%= song.name %></a>  by: <%= song.user.name %></p>
-    <% }) %>
-  </div> -->
-
-  <!-- This search functionality will only come into play if I have a search land page and can integrate a search -->
-  <!-- <div class="col s3">
-    <form action="/songs/result" method="get" id="searchForm">
-      <input type="search" name="songSearch" id="songSearch">
-      <button type="submit" form="searchForm" class="btn-flat">Search for Song</button>
-    </form>
-  </div> -->
 </div>

@@ -27,64 +27,12 @@ router.get('/', (req, res) => {
             public: false
           }
         }).then(privSongs => {
-          // console.log(privSongs)
-          // console.log('this is the array privSongs ^^^')
           let firstFilteredSongs = privSongs.filter(song => {
-            // console.log('this should be song.user.id below');
-            // console.log(song.user.id);
-            // console.log('this should be req.user.id below');
-            // console.log(req.user.id);
             return song.user.id != req.user.id
           });
-          // console.log(firstFilteredSongs)
-          // console.log('this is the array firstFilteredSongs ^^^')
           return firstFilteredSongs
-        }).then((firstFilteredSongs) => {
-          db.songsUsers.findAll({
-            where: {
-              userId: req.user.id
-            }
-          }).then(songsUsers => {
-            // filter the songs from the first filter with the songsUsers object
-            // let filteredSongs = firstFilteredSongs.filter(song => {
-              // iterate over all of songsUsers to see if songId matches any of these song ids
-              // let sharedSongs = firstFilteredSongs.forEach(song => {
-              //   for (i = 0; i < songsUsers.length; i++) {
-              //     if (song.id == songsUsers[i].songId) {
-              //       return song;
-              //     } else {
-              //       return;
-              //     }
-              //   }
-              // })
-              // ​Array.prototype.diff = function(arr2) {
-              //   let ret = [];
-              //   for(let i in this) {   
-              //       if(arr2.indexOf(this[i]) > -1){
-              //           ret.push(this[i]);
-              //       }
-              //   }
-              //   console.log(ret)
-              //   console.log('this is the return of the diff function ^^^')
-              //   return ret;
-              // };
-              // let sharedSongs = firstFilteredSongs.diff(songsUsers);
-              console.log(sharedSongs);
-              console.log('this ^^^^ is array of sharedSongs');
-              // let sharedSongs = songsUsers.forEach(songsUser => {
-              //   if (song.id == songsUser.songId) {
-              //     return song;
-              //   } else {
-              //     return false;
-              //   }
-              // });
-            // });
-            console.log(filteredSongs);
-            console.log('this is the array filteredSongs ^^^')
-            // return filteredSongs
-          }).then(filteredSongs => {
-              res.render('songs/index', { user, songs: pubSongs, filteredSongs });
-          }).catch(err => {console.log(err)});
+        }).then(filteredSongs => {
+          res.render('songs/index', { user, songs: pubSongs, filteredSongs });
         }).catch(err => {console.log(err)});
       }).catch(err => {console.log(err)});
     }).catch(err => {console.log(err)});
@@ -107,17 +55,11 @@ router.get('/new', isLoggedIn, (req, res) => {
 
 // submits the first page of song creation
 router.post('/new/song', isLoggedIn, (req, res) => {
-  console.log('😆Test1')
   // submit button from new.ejs file in songs view folder sends here
-  // should add info to DB
-  // let instanceCount = math on measure count with chord cadence
-
   let instanceCount;
   if ((req.body.chordCadence == 4) && (req.body.timeSig == "4 4")) {
-    console.log('😆Test2')
     instanceCount = req.body.measureNumber * 4;
   }
-  console.log('😆Test3')
   db.song.create({
       userId: req.user.id,
       name: req.body.songName,
@@ -125,17 +67,13 @@ router.post('/new/song', isLoggedIn, (req, res) => {
       chordCadence: req.body.chordCadence,
       instanceCount: instanceCount,
       public: req.body.pubPriv,
-    // need to include connecting information about songsUsers as well
   }).then(song => {
-    console.log('😆Test4')
-    // will render songs/edit page with the DB info accessible
     res.redirect(`/songs/edit/${song.id}`);
   }).catch(err => console.log(err));
 });
 
 // gets the page for editing a song
 router.get('/edit/:id', isLoggedIn, (req, res) => {
-  console.log('😆Test5')
   db.song.findOne({
     where: {
       id: req.params.id
@@ -147,7 +85,6 @@ router.get('/edit/:id', isLoggedIn, (req, res) => {
         songId: req.params.id
       }
     }).then(instances => {
-      console.log('😆Test6')
       res.render('songs/edit', { song, instances, user: req.user });
     })
   })
@@ -159,9 +96,9 @@ router.put('/:id', isLoggedIn, (req, res) => {
     name: req.body.songName,
     public: req.body.pubPriv
     // ideally would have, but for the moment not including - instanceCount: instanceCount,
-    // same here - public: req.body.pubPriv,
-  }, { where: { id: req.params.id }
-  // need to include connecting information about songsUsers as well
+    }, { where: {
+      id: req.params.id
+    }
   }).then(() => {
     db.song.findOne({
       where: {
@@ -176,8 +113,6 @@ router.put('/:id', isLoggedIn, (req, res) => {
           // do an axios call and add that chord to the chord DB with no associated user
         // create each instance in the instance DB table
         // do a timeout function before redirecting for now, can also look into async
-      console.log('😆Test4')
-      // console.log(song)
       for (let i = 1; i <= (song.instanceCount); i++) {
         let chordNum = "chord" + i;
         // console.log(req.body.chord1)
@@ -190,8 +125,7 @@ router.put('/:id', isLoggedIn, (req, res) => {
           noSpaceChordName = req.body[chordNum].replace(/\s/g, '');
         }
         if (noSpaceChordName == '') {
-          // do nothing EXCEPT DELETE if the instance had previously held a chord at that location
-          console.log('😍😍')
+          // DELETE if the instance had previously held a chord at that location
           db.instance.destroy({
             where: {
               location: i,
@@ -217,8 +151,6 @@ router.put('/:id', isLoggedIn, (req, res) => {
                   apiSearchChordName: chordNameSearch,
                   imageChordName: req.body[chordNum] // should have %23 but no underscores
                 }).then(chord => {
-                  console.log(chord);
-                  console.log(i);
                   // create instance with the correct chordId
                   db.instance.findOne({
                     where: {
@@ -246,8 +178,6 @@ router.put('/:id', isLoggedIn, (req, res) => {
               }).catch(err=>console.log(err));
             } else {
               // if the chord does exist in the chord table, then:
-              console.log('this should be the number of i at this point in code:');
-              console.log(i);
               // if the instance exists, update it, otherwise create it
               db.instance.findOne({
                 where: {
@@ -279,7 +209,6 @@ router.put('/:id', isLoggedIn, (req, res) => {
         }
       }
     }).catch(err=>console.log(err));
-    // possibly create a timeout function to move forward
     setTimeout(function() {
       db.song.findOne({
         where: {
@@ -306,17 +235,9 @@ router.get('/:id', (req, res) => {
       songId: req.params.id
     }
   }).then(instances => {
-    console.log(instances[0].song.public);
-    console.log('this is song info directly above');
     res.render('songs/show', { user: userData, instances });
   }).catch(err=>console.log(err));
 });
-
-// updates a song (both the song table and the instance table)
-// router.put('/:id', isLoggedIn, (req, res) => {
-  // this should redirect to the song at the ID that was edited
-//   res.redirect(`/songs/${song.id}`);
-// });
 
 // deletes a song from the DB (both from song and instance tables)
 router.delete('/:id', isLoggedIn, (req, res) => {
