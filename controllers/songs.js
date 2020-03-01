@@ -225,14 +225,11 @@ router.put('/:id', isLoggedIn, (req, res) => {
 
 // shows a single song
 router.get('/:id', (req, res) => {
-  console.log('test1')
   let userData;
   if (req.user) {
-  console.log('test2')
     userData = req.user.dataValues
   } else {
     userData = [];
-  console.log('test3')
   }
   db.instance.findAll({
     include: [db.chord, db.song],
@@ -240,34 +237,35 @@ router.get('/:id', (req, res) => {
       songId: req.params.id
     }
   }).then(instances => {
-    console.log('test3')
-    if (instances[0].song.public === true) {
-      res.render('songs/show', { user: userData, instances });
-    } else if (req.user) {
-      if (req.user.id === instances[0].song.userId) {
-        res.render('songs/show', { user: userData, instances });
-      } else {
-        console.log('test4')
-        db.share.findOne({
-          where: {
-            songId: req.params.id,
-            userId: req.user.id
-          }
-        }).then(share => {
-          console.log('I bet it is getting to this point')
-          if (share) {
-            console.log('2I bet it is getting to this point')
-            res.render('songs/show', { user: userData, instances });
-          } else {
-            console.log('3I bet it is getting to this point')
-            res.redirect('/songs');
-          }
-        }).catch(err=>console.log(err));
+    db.song.findOne({
+      include: [db.user],
+      where: {
+        id: req.params.id
       }
-      // res.redirect('/songs');
-    } else {
-      res.redirect('/songs');
-    }
+    }).then(song => {
+      if (instances[0].song.public === true) {
+        res.render('songs/show', { user: userData, instances, song });
+      } else if (req.user) {
+        if (req.user.id === instances[0].song.userId) {
+          res.render('songs/show', { user: userData, instances, song });
+        } else {
+          db.share.findOne({
+            where: {
+              songId: req.params.id,
+              userId: req.user.id
+            }
+          }).then(share => {
+            if (share) {
+              res.render('songs/show', { user: userData, instances, song });
+            } else {
+              res.redirect('/songs');
+            }
+          }).catch(err=>console.log(err));
+        }
+      } else {
+        res.redirect('/songs');
+      }
+    }).catch(err=>console.log(err));
   }).catch(err=>console.log(err));
 });
 

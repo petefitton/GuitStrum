@@ -23,11 +23,13 @@
   </div>
   <% } %>
   <div class="col s7 offset-s1">
-    <h1 class="center-align h1MargTopLower"><%= instances[0].song.name %></h1>
-    <p class="center-align">By user number: <%= instances[0].song.userId %></p>
+    <h1 class="center-align h1MargTopLower leftMargNeg84"><%= song.name %></h1>
   </div>
-  <div class="col s1 offset-s1">
-    <h6><% if (instances[0].song.public) { %> Public <% } else { %> Private <% } %></h6>
+  <div class="col s2">
+    <p class="">Written By: <%= song.user.name %></p>
+    <div class="col s1 offset-s4">  
+      <h6><% if (instances[0].song.public) { %> Public <% } else { %> Private <% } %></h6>
+    </div>
   </div>
 </div>
 
@@ -91,6 +93,8 @@
       <a class="modal-trigger btn red darken-4 waves-effect waves-light" href="#modalDelete">DELETE</a>
     </div>
   </div>
+<% } else { %>
+  <div class="row"></div>
 <% } %>
 
 
