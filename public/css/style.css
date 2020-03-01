@@ -69,3 +69,8 @@ footer {
 .leftMarg19 {
     margin-left: 19px;
 }
+
+.chordDisp {
+    line-height: 57px;
+    font-size: 22px;
+}
