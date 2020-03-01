@@ -105,4 +105,101 @@ router.delete('/:chordName', isLoggedIn, (req, res) => {
   }).catch(err => res.send({ "error" : err}));
 });
 
+router.get('/random', (req, res) => {
+  randChordLetter = function() {
+    let randNum = Math.floor(Math.random() * 7);
+    let randLetter;
+    switch(randNum) {
+      case 0:
+        randLetter = "A";
+        break;
+      case 1:
+        randLetter = "B";
+        break;
+      case 2:
+        randLetter = "C";
+        break;
+      case 3:
+        randLetter = "D";
+        break;
+      case 4:
+        randLetter = "E";
+        break;
+      case 5:
+        randLetter = "F";
+        break;
+      case 6:
+        randLetter = "G";
+        break;
+      default:
+        randLetter = "C"
+    }
+    return randLetter;
+  };
+
+
+
+  randChordAccidental = function() {
+    let randNum = Math.floor(Math.random() * 4);
+    let randAccidental;
+    switch(randNum) {
+      case 0:
+        randAccidental = "";
+        break;
+      case 1:
+        randAccidental = "";
+        break;
+      case 2:
+        randAccidental = "b";
+        break;
+      case 3:
+        randAccidental = "%23";
+        break;
+      default:
+        randAccidental = ""
+    }
+    return randAccidental;
+  };
+  
+  randChordQuality = function() {
+    let randNum = Math.floor(Math.random() * 9);
+    let randQuality;
+    switch(randNum) {
+      case 0:
+        randQuality = "";
+        break;
+      case 1:
+        randQuality = "";
+        break;
+      case 2:
+        randQuality = "maj7";
+        break;
+      case 3:
+        randQuality = "m7";
+        break;
+      case 4:
+        randQuality = "mmaj7";
+        break;
+      case 5:
+        randQuality = "sus2";
+        break;
+      case 6:
+        randQuality = "sus4";
+        break;
+      case 7:
+        randQuality = "7";
+        break;
+      case 8:
+        randQuality = "";
+        break;
+      default:
+        randQuality = ""
+    }
+    return randQuality;
+  };
+
+  let randChord = randChordLetter() + randChordAccidental() + randChordQuality();
+  res.redirect(`/chords/result?chordSearch=${randChord}`)
+})
+
 module.exports = router;

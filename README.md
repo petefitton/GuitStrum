@@ -116,6 +116,8 @@ A user can also choose to share a private song that the user has created with an
 
 A visitor or user can also click on the chord on a particular song which will open up a new browser tab which displays how to play the particular guitar chord.
 
+There is also a random chord button which can be found on either the Chords index page or on the results page when searching for a chord.
+
 
 #### Sources of Information
   * https://stackoverflow.com/questions/8217419/how-to-determine-if-javascript-array-contains-an-object-with-an-attribute-that-e
