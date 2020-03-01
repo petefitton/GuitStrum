@@ -16,12 +16,84 @@ router.get('/', (req, res) => {
       }
     }).then((user) => {
       db.song.findAll({
-      }).then(songs => {
-        res.render('songs/index', { user, songs });
+        include: [db.user],
+        where: {
+          public: true
+        }
+      }).then(pubSongs => {
+        db.song.findAll({
+          include: [db.user],
+          where: {
+            public: false
+          }
+        }).then(privSongs => {
+          // console.log(privSongs)
+          // console.log('this is the array privSongs ^^^')
+          let firstFilteredSongs = privSongs.filter(song => {
+            // console.log('this should be song.user.id below');
+            // console.log(song.user.id);
+            // console.log('this should be req.user.id below');
+            // console.log(req.user.id);
+            return song.user.id != req.user.id
+          });
+          // console.log(firstFilteredSongs)
+          // console.log('this is the array firstFilteredSongs ^^^')
+          return firstFilteredSongs
+        }).then((firstFilteredSongs) => {
+          db.songsUsers.findAll({
+            where: {
+              userId: req.user.id
+            }
+          }).then(songsUsers => {
+            // filter the songs from the first filter with the songsUsers object
+            // let filteredSongs = firstFilteredSongs.filter(song => {
+              // iterate over all of songsUsers to see if songId matches any of these song ids
+              // let sharedSongs = firstFilteredSongs.forEach(song => {
+              //   for (i = 0; i < songsUsers.length; i++) {
+              //     if (song.id == songsUsers[i].songId) {
+              //       return song;
+              //     } else {
+              //       return;
+              //     }
+              //   }
+              // })
+              // ​Array.prototype.diff = function(arr2) {
+              //   let ret = [];
+              //   for(let i in this) {   
+              //       if(arr2.indexOf(this[i]) > -1){
+              //           ret.push(this[i]);
+              //       }
+              //   }
+              //   console.log(ret)
+              //   console.log('this is the return of the diff function ^^^')
+              //   return ret;
+              // };
+              // let sharedSongs = firstFilteredSongs.diff(songsUsers);
+              console.log(sharedSongs);
+              console.log('this ^^^^ is array of sharedSongs');
+              // let sharedSongs = songsUsers.forEach(songsUser => {
+              //   if (song.id == songsUser.songId) {
+              //     return song;
+              //   } else {
+              //     return false;
+              //   }
+              // });
+            // });
+            console.log(filteredSongs);
+            console.log('this is the array filteredSongs ^^^')
+            // return filteredSongs
+          }).then(filteredSongs => {
+              res.render('songs/index', { user, songs: pubSongs, filteredSongs });
+          }).catch(err => {console.log(err)});
+        }).catch(err => {console.log(err)});
       }).catch(err => {console.log(err)});
     }).catch(err => {console.log(err)});
   } else {
     db.song.findAll({
+      include: [db.user],
+      where: {
+        public: true
+      }
     }).then(songs => {
       res.render('songs/index', { songs });
     }).catch(err => {console.log(err)});
@@ -257,6 +329,17 @@ router.delete('/:id', isLoggedIn, (req, res) => {
   }).catch(err=>console.log(err));
 });
 
+// adds a song to SongsUsers table to share with another user if it is private
+router.post('/share/:id', isLoggedIn, (req, res, next) => {
+  db.songsUsers.findOrCreate({
+    where: {
+      userId: req.body.userShareId,
+      songId: req.params.id
+    }
+  }).then(() => {
+    res.redirect(`/songs/${req.params.id}`)
+  }).catch(err=>console.log(err));
+});
 
 
 module.exports = router;

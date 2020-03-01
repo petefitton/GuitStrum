@@ -1,6 +1,12 @@
 <!-- <h1>This page shows a single song. Has an edit button and a delete button. Displays song and some song information.</h1> -->
-<div class="row">
+<div class="row botMarg0">
+  <div class="col s2 right">
+    <button data-target="modalShare" type="submit" class="modal-trigger green darken-4 btn waves-effect waves-light">
+      Share Song
+    </button>
+  </div>
 </div>
+
 <div class="row">
   <div class="col s2">
     <form action="/songs/edit/<%= instances[0].song.id %>" method="get">
@@ -83,7 +89,7 @@
 </div>
 
 
-<!-- Modal Structure -->
+<!-- Modals -->
 <div id="modalDelete" class="modal">
   <div class="modal-content">
     <h4>CONFIRM</h4>
@@ -94,6 +100,27 @@
     <form method="post" action="/songs/<%= instances[0].song.id %>/?_method=DELETE">
       <button type="submit" class="red btn waves-effect waves-red">Confirm Delete</button>
       <a href="#!" class="modal-close btn-flat">Cancel</a>
+    </form>
+  </div>
+</div>
+
+
+<div id="modalShare" class="modal">
+  <div class="modal-content">
+    <h4>Share a Private Song with Another User</h4>
+    <p>If your song is private, please add the user ID of someone you would like to share this song with.</p>
+  </div>
+  <div class="modal-footer row">
+    <form method="post" action="/songs/share/<%= instances[0].song.id %>">
+    <div class="col s4 offset-s2">
+      <input type="text" name="userShareId" id="userShareId" placeholder="Enter User ID">
+    </div>
+    <div class="col s2 offset-s1">
+      <button type="submit" class="red btn waves-effect waves-red">Share</button>
+    </div>
+    <div class="col s2">
+      <a href="#!" class="modal-close btn-flat">Cancel</a>
+    </div>
     </form>
   </div>
 </div>

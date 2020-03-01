@@ -1,7 +1,14 @@
 <!-- <h1>Home page for songs section of site. Has list of public songs and list of private songs plus a create a new song button.</h1> -->
+<div class="row botMarg0">
+  <div class="col s3 right">
+    <form action="/songs/new" method="get" id="newSongForm">
+      <button type="submit" form="newSongForm" class="orange white-text darken-4 waves-effect waves-light btn-large">Create New Song</button>
+    </form>
+  </div>
+</div>
 
 <div class="row">
-  <div class="col s4 offset-s1">
+  <div class="col s3 offset-s1">
     <h3>My Songs:</h3>
     <!-- for each song that user has through songsUsers -->
     <% if (typeof user == 'object' && user) { %>
@@ -14,22 +21,19 @@
   </div>
 
   <div class="col s4">
-    <h3>All Songs:</h3>
+    <h3>All Public Songs:</h3>
     <% songs.forEach(function(song) { %>
-      <p><a href="/songs/<%= song.id %>"><%= song.name %></a></p>
+      <p><a href="/songs/<%= song.id %>"><%= song.name %></a>  by: <%= song.user.name %></p>
     <% }) %>
-    <ul>
-      <!-- iterate with for each in ejs to create an li tag with a href equal to the song's url location -->
-      <li><a href="">EJS to List title</a></li>
-      <!-- end iteration -->
-    </ul>
   </div>
 
-  <div class="col s3">
-    <form action="/songs/new" method="get" id="newSongForm">
-      <button type="submit" form="newSongForm" class="orange white-text darken-4 waves-effect waves-light btn-large">Create New Song</button>
-    </form>
-  </div>
+  <!-- <div class="col s4">
+    <h3>Others' Private Songs:</h3>
+    <% filteredSongs.forEach(song => { %>
+      <p><a href="/songs/<%= song.id %>"><%= song.name %></a>  by: <%= song.user.name %></p>
+    <% }) %>
+  </div> -->
+
   <!-- This search functionality will only come into play if I have a search land page and can integrate a search -->
   <!-- <div class="col s3">
     <form action="/songs/result" method="get" id="searchForm">
