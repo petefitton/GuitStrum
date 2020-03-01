@@ -27,11 +27,6 @@ router.get('/', (req, res) => {
             userId: req.user.id
           }
         }).then(sharedSongs => {
-        //   let firstFilteredSongs = privSongs.filter(song => {
-        //     return song.user.id != req.user.id
-        //   });
-        //   return firstFilteredSongs
-        // }).then(filteredSongs => {
           res.render('songs/index', { user, songs: pubSongs, sharedSongs });
         }).catch(err => {console.log(err)});
       }).catch(err => {console.log(err)});
@@ -282,9 +277,6 @@ router.delete('/:id', isLoggedIn, (req, res) => {
 
 // adds a song to SongsUsers table to share with another user if it is private
 router.post('/share/:id', isLoggedIn, (req, res, next) => {
-  // I have access to the id number of the song and I have access to the user ID who should be shared to
-  // I want to find or create a row in the share table via the share model
-  // 
   db.share.findOrCreate({
     where: {
       userId: req.body.userShareId,

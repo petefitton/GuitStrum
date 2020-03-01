@@ -1,4 +1,4 @@
-<!-- I do not plan on having a profile page -->
+<!-- Profile page -->
 <div class="row">
   <div class="col s4"></div>
   <h2 class="center-align col s4"><%= locals.user.name %>'s Profile</h2>
@@ -9,8 +9,6 @@
     </form>
   </div>
 </div>
-
-<!-- <a href="/">Home</a> -->
 
 <div class="row">
   <div class="col s3 offset-s1">
@@ -38,7 +36,6 @@
 
   <div class="col s3 topMarg44">
     <form action="/chords/result" method="get">
-      <!-- <label for="chordSearch">Search for Chord:</label> -->
       <input type="search" name="chordSearch" id="chordSearch" placeholder="Search for Chord">
       <button type="submit">SEARCH</button>
     </form>

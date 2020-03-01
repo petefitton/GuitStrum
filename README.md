@@ -112,6 +112,10 @@ A visitor can easily create an account and become a user.  Users have the abilit
 
 The songs can be edited after creation which gives flexibility to a user who is in the early stages of sketching out song ideas or in the later stage of refining a song.
 
+A user can also choose to share a private song that the user has created with another user while still keeping the song set as private.  This feature is accessible when viewing the particular song's page.
+
+A visitor or user can also click on the chord on a particular song which will open up a new browser tab which displays how to play the particular guitar chord.
+
 
 #### Sources of Information
   * https://stackoverflow.com/questions/8217419/how-to-determine-if-javascript-array-contains-an-object-with-an-attribute-that-e
