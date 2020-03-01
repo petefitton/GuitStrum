@@ -1,12 +1,14 @@
 <!-- <h1>This page shows a single song. Has an edit button and a delete button. Displays song and some song information.</h1> -->
 <% if (user.id != null) { %>
-  <div class="row botMarg0">
-    <div class="col s2 right">
-      <button data-target="modalShare" type="submit" class="modal-trigger green darken-4 btn waves-effect waves-light">
-        Share Song
-      </button>
+  <% if (user.id == instances[0].song.userId) { %>
+    <div class="row botMarg0">
+      <div class="col s2 right">
+        <button data-target="modalShare" type="submit" class="modal-trigger green darken-4 btn waves-effect waves-light">
+          Share Song
+        </button>
+      </div>
     </div>
-  </div>
+<% } %>
 <% } %>
 
 <div class="row">

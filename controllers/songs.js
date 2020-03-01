@@ -21,18 +21,18 @@ router.get('/', (req, res) => {
           public: true
         }
       }).then(pubSongs => {
-        db.song.findAll({
-          include: [db.user],
+        db.share.findAll({
+          include: [db.song],
           where: {
-            public: false
+            userId: req.user.id
           }
-        }).then(privSongs => {
-          let firstFilteredSongs = privSongs.filter(song => {
-            return song.user.id != req.user.id
-          });
-          return firstFilteredSongs
-        }).then(filteredSongs => {
-          res.render('songs/index', { user, songs: pubSongs, filteredSongs });
+        }).then(sharedSongs => {
+        //   let firstFilteredSongs = privSongs.filter(song => {
+        //     return song.user.id != req.user.id
+        //   });
+        //   return firstFilteredSongs
+        // }).then(filteredSongs => {
+          res.render('songs/index', { user, songs: pubSongs, sharedSongs });
         }).catch(err => {console.log(err)});
       }).catch(err => {console.log(err)});
     }).catch(err => {console.log(err)});
@@ -225,11 +225,14 @@ router.put('/:id', isLoggedIn, (req, res) => {
 
 // shows a single song
 router.get('/:id', (req, res) => {
+  console.log('test1')
   let userData;
   if (req.user) {
+  console.log('test2')
     userData = req.user.dataValues
   } else {
     userData = [];
+  console.log('test3')
   }
   db.instance.findAll({
     include: [db.chord, db.song],
@@ -237,14 +240,31 @@ router.get('/:id', (req, res) => {
       songId: req.params.id
     }
   }).then(instances => {
+    console.log('test3')
     if (instances[0].song.public === true) {
       res.render('songs/show', { user: userData, instances });
     } else if (req.user) {
       if (req.user.id === instances[0].song.userId) {
         res.render('songs/show', { user: userData, instances });
+      } else {
+        console.log('test4')
+        db.share.findOne({
+          where: {
+            songId: req.params.id,
+            userId: req.user.id
+          }
+        }).then(share => {
+          console.log('I bet it is getting to this point')
+          if (share) {
+            console.log('2I bet it is getting to this point')
+            res.render('songs/show', { user: userData, instances });
+          } else {
+            console.log('3I bet it is getting to this point')
+            res.redirect('/songs');
+          }
+        }).catch(err=>console.log(err));
       }
-      // if I implemented share feature, then I would add an else if here to continue rendering the page if the private song was shared with a different user
-      res.redirect('/songs');
+      // res.redirect('/songs');
     } else {
       res.redirect('/songs');
     }
@@ -264,7 +284,10 @@ router.delete('/:id', isLoggedIn, (req, res) => {
 
 // adds a song to SongsUsers table to share with another user if it is private
 router.post('/share/:id', isLoggedIn, (req, res, next) => {
-  db.songsUsers.findOrCreate({
+  // I have access to the id number of the song and I have access to the user ID who should be shared to
+  // I want to find or create a row in the share table via the share model
+  // 
+  db.share.findOrCreate({
     where: {
       userId: req.body.userShareId,
       songId: req.params.id

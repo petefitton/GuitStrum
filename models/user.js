@@ -47,6 +47,7 @@ module.exports = (sequelize, DataTypes) => {
     models.user.belongsToMany(models.chord, { through: "chordsUsers" });
     models.user.belongsToMany(models.song, { through: "songsUsers" });
     models.user.hasMany(models.song);
+    models.user.hasMany(models.share);
   };
 
   // Compares entered password to hashed password

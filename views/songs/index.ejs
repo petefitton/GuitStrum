@@ -12,6 +12,7 @@
 <div class="row">
   <div class="col s3 offset-s1">
     <h3>My Songs:</h3>
+
     <!-- for each song that user has through songsUsers -->
     <% if (typeof user == 'object' && user) { %>
       <% if (typeof user.songs == 'object' && user.songs) { %>
@@ -28,4 +29,15 @@
       <p><a href="/songs/<%= song.id %>"><%= song.name %></a>  by: <%= song.user.name %></p>
     <% }) %>
   </div>
+
+  <% if (typeof user == 'object' && user) { %>
+    <% if (user.id != null) { %>
+      <div class="col s4">
+        <h3>All Shared Songs:</h3>
+        <% sharedSongs.forEach(function(sharedSong) { %>
+          <p><a href="/songs/<%= sharedSong.song.id %>"><%= sharedSong.song.name %></a>  by: <%= sharedSong.song.userId %></p>
+        <% }) %>
+      </div>
+    <% } %>
+  <% } %>
 </div>
