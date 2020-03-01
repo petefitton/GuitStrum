@@ -44,7 +44,9 @@
         <% for (var h = 0; h < 2; h++) { %>
           <% for (var j = 0; j < 4; j++) { %>
     <div class="input-field col s1">
-      <p><% for (instance of instances) { if (instance.location == k) {%><%= instance.chord.colloqChordName %><%}}%></p>
+      <!-- <p><% for (instance of instances) { if (instance.location == k) {%><%= instance.chord.colloqChordName %><%}}%></p> -->
+      <!-- <a href="<% for (instance of instances) { if (instance.location == k) {%>/chords/result?chordSearch=<%= instance.chord.apiSearchChordName %><%}}%>"><% for (instance of instances) { if (instance.location == k) {%><%= instance.chord.colloqChordName %><%}}%></a> -->
+      <a href="<% for (instance of instances) { if (instance.location == k) {%>/chords/result?chordSearch=<%= instance.chord.apiSearchChordName %>"><%= instance.chord.colloqChordName %><% break } else if (instance == instances[instances.length - 1]) {%>"><% } }%></a>
     </div>
             <% k++ %>
           <% } %>
@@ -62,7 +64,8 @@
       <% } %>
       <% for (var j = 0; j < 4; j++) { %>
     <div class="input-field col s1">
-      <p><% for (instance of instances) { if (instance.location == k) {%><%= instance.chord.colloqChordName %><%}}%></p>
+      <!-- <p><% for (instance of instances) { if (instance.location == k) {%><%= instance.chord.colloqChordName %><%}}%></p> -->
+      <a href="<% for (instance of instances) { if (instance.location == k) {%>/chords/result?chordSearch=<%= instance.chord.apiSearchChordName %>"><%= instance.chord.colloqChordName %><% break } else if (instance == instances[instances.length - 1]) {%>"><% } }%></a>
     </div>
         <% k++ %>
       <% } %>
@@ -71,7 +74,8 @@
     </div>
     <% for (var j = 0; j < 4; j++) { %>
     <div class="input-field col s1">
-      <p><% for (instance of instances) { if (instance.location == k) {%><%= instance.chord.colloqChordName %><%}}%></p>
+      <!-- <p><% for (instance of instances) { if (instance.location == k) {%><%= instance.chord.colloqChordName %><%}}%></p> -->
+      <a href="<% for (instance of instances) { if (instance.location == k) {%>/chords/result?chordSearch=<%= instance.chord.apiSearchChordName %>"><%= instance.chord.colloqChordName %><% break } else if (instance == instances[instances.length - 1]) {%>"><% } }%></a>
     </div>
       <% k++ %>
     <% } %>
