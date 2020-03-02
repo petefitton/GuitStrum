@@ -35,18 +35,18 @@
     <% let k = 1 %>
     <!-- instanceCount converted to four instances per measure, assuming minimum eight measures for
     section of code lower down, dividing by 2 because of loop inside that contains var h that loops twice -->
-      <% for (var i = 0; i < ((song.instanceCount/4) + 2); i = i + 4) { %>
-        <% for (var h = 0; h < 2; h++) { %>
-          <% for (var j = 0; j < 4; j++) { %>
+    <% for (var i = 0; i < ((song.instanceCount/4) - 2); i = i + 2) { %>
+      <% for (var h = 0; h < 2; h++) { %>
+        <% for (var j = 0; j < 4; j++) { %>
     <div class="input-field col s1">
       <input type="text" name="chord<%= k %>" id="chord<%= k %>" value="<% for (instance of instances) { if (instance.location == k) {%><%= instance.chord.colloqChordName %><%}}%>">
     </div>
-            <% k++ %>
-          <% } %>
+          <% k++ %>
+        <% } %>
     <div class="input-field col s1 barIcon">
       |
     </div>
-        <% } %>
+      <% } %>
   </div>
   <div class="row">
     <div class="input-field col s1">
@@ -54,13 +54,13 @@
     <div class="input-field col s1 barIcon">
       |
     </div>
-      <% } %>
-      <% for (var j = 0; j < 4; j++) { %>
+    <% } %>
+    <% for (var j = 0; j < 4; j++) { %>
     <div class="input-field col s1">
       <input type="text" name="chord<%= k %>" id="chord<%= k %>" value="<% for (instance of instances) { if (instance.location == k) {%><%= instance.chord.colloqChordName %><%}}%>">
     </div>
-        <% k++ %>
-      <% } %>
+      <% k++ %>
+    <% } %>
     <div class="input-field col s1 barIcon">
       |
     </div>
