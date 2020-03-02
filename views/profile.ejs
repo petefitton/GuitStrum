@@ -11,7 +11,7 @@
 </div>
 
 <div class="row">
-  <div class="col s3 offset-s1">
+  <div class="col s3 m3 offset-m1">
     <h3>My Chords:</h3>
     <!-- for each chord that user has through ChordsUsers -->
     <% if (typeof user == 'object' && user) { %>
@@ -34,7 +34,7 @@
     <% } %>
   </div>
 
-  <div class="col s3 topMarg44">
+  <div class="col s3 offset-s1 m3 topMarg44">
     <form action="/chords/result" method="get">
       <input type="search" name="chordSearch" id="chordSearch" placeholder="Search for Chord">
       <button type="submit">SEARCH</button>
