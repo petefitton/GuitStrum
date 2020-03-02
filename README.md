@@ -1,3 +1,6 @@
+Live Link:
+https://guitstrum.herokuapp.com/
+
 # GuitStrum
 
 Over the weekend I planned out my project. The initial state of everything prior to working with the UX team can be seen below.
