@@ -280,7 +280,8 @@ router.post('/share/:id', isLoggedIn, (req, res, next) => {
   db.share.findOrCreate({
     where: {
       userId: req.body.userShareId,
-      songId: req.params.id
+      songId: req.params.id,
+      origUserName: req.user.name
     }
   }).then(() => {
     res.redirect(`/songs/${req.params.id}`)

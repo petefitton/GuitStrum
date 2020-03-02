@@ -2,7 +2,8 @@
 module.exports = (sequelize, DataTypes) => {
   const share = sequelize.define('share', {
     songId: DataTypes.INTEGER,
-    userId: DataTypes.INTEGER
+    userId: DataTypes.INTEGER,
+    origUserName: DataTypes.STRING
   }, {});
   share.associate = function(models) {
     // associations can be defined here

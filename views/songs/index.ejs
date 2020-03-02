@@ -35,7 +35,7 @@
       <div class="col s4">
         <h3>All Shared Songs:</h3>
         <% sharedSongs.forEach(function(sharedSong) { %>
-          <p><a href="/songs/<%= sharedSong.song.id %>"><%= sharedSong.song.name %></a>  by: <%= sharedSong.song.userId %></p>
+          <p><a href="/songs/<%= sharedSong.song.id %>"><%= sharedSong.song.name %></a>  by: <%= sharedSong.origUserName %></p>
         <% }) %>
       </div>
     <% } %>
