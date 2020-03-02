@@ -32,7 +32,7 @@ app.use(session({
   store: sessionStore
 }));
 
-// sessionStore.sync();
+sessionStore.sync();
 
 app.use(passport.initialize());
 app.use(passport.session());
