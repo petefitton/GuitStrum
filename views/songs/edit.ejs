@@ -33,8 +33,8 @@
       |
     </div>
     <% let k = 1 %>
-    <!-- instanceCount converted to four instances per measure, assuming minimum eight measures for
-    section of code lower down, dividing by 2 because of loop inside that contains var h that loops twice -->
+    <!-- instanceCount converted to four instances per measure, assuming minimum two measures for
+    section of code lower down, subtracting 2 because of those minimum two final measures -->
     <% for (var i = 0; i < ((song.instanceCount/4) - 2); i = i + 2) { %>
       <% for (var h = 0; h < 2; h++) { %>
         <% for (var j = 0; j < 4; j++) { %>
